@@ -235,6 +235,8 @@ export default function AdminDashboard() {
   const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [newLead, setNewLead] = useState({ name: '', phone: '', service: '', date: '', time: '', type: 'Clinic' });
   const [loading, setLoading] = useState(true);
   const [adminName, setAdminName] = useState('Admin');
   const router = useRouter();
@@ -352,6 +354,32 @@ export default function AdminDashboard() {
     } catch (e) { console.error(e); }
   };
 
+  const handleCreateLead = async (e) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('admin_token');
+      const resp = await fetch('/api/admin/bookings', {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(newLead),
+      });
+
+      if (resp.status === 401) {
+          handleLogout();
+          return;
+      }
+
+      if (resp.ok) {
+        setIsAddModalOpen(false);
+        setNewLead({ name: '', phone: '', service: '', date: '', time: '', type: 'Clinic' });
+        fetchBookings();
+      }
+    } catch (e) { console.error(e); }
+  };
+
   const navItems = [
     { name: 'Overview', icon: LayoutDashboard },
     { name: 'Patient Leads', icon: Users },
@@ -442,8 +470,8 @@ export default function AdminDashboard() {
                                 <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-[#6F7674] group-focus-within:text-[#1DE9B6] transition-colors" size={20} />
                                 <input type="text" placeholder="Scan clinical registry..." className="w-full bg-white/5 border border-white/5 rounded-2xl py-5 pl-16 pr-6 text-sm outline-none focus:ring-2 ring-[#1DE9B6]/20 transition-all font-black uppercase tracking-widest placeholder:text-[#6F7674] text-white" value={search} onChange={(e) => setSearch(e.target.value)} />
                             </div>
-                            <div className="flex gap-3 p-2 bg-white/5 rounded-2xl border border-white/5">
-                                {['All', 'Pending', 'Contacted'].map(f => (
+                            <div className="flex gap-4 p-2 bg-white/5 rounded-2xl border border-white/5">
+                                {['All', 'Pending', 'Contacted', 'Completed'].map(f => (
                                     <button 
                                         key={f} 
                                         onClick={() => setFilter(f)} 
@@ -453,6 +481,9 @@ export default function AdminDashboard() {
                                     </button>
                                 ))}
                             </div>
+                            <button onClick={() => setIsAddModalOpen(true)} className="flex items-center gap-3 bg-[#D4AF37] text-[#050807] px-8 py-4 rounded-2xl font-black text-[10px] uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-xl">
+                                <UserPlus size={16} /> Add Manual Lead
+                            </button>
                         </div>
                         <div className="flex-1 overflow-y-auto custom-scrollbar">
                             <table className="w-full text-left">
@@ -493,8 +524,9 @@ export default function AdminDashboard() {
                                             </td>
                                             <td className="px-12 py-8 text-right">
                                                 <div className="flex justify-end gap-3 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                                                    <button onClick={() => handleUpdateStatus(b._id || b.id, 'Contacted')} className="w-12 h-12 bg-white/5 text-white rounded-2xl hover:bg-[#1DE9B6] hover:text-[#050807] transition-all border border-white/10 flex items-center justify-center shadow-lg"><Mail size={18} /></button>
-                                                    <button onClick={() => handleDelete(b._id || b.id)} className="w-12 h-12 bg-red-500/10 text-red-400 rounded-2xl hover:bg-red-500 hover:text-white transition-all border border-red-500/10 flex items-center justify-center shadow-lg"><Trash2 size={18} /></button>
+                                                    <button onClick={() => handleUpdateStatus(b._id || b.id, 'Completed')} title="Confirm/Complete" className="w-12 h-12 bg-white/5 text-green-400 rounded-2xl hover:bg-green-500 hover:text-white transition-all border border-white/10 flex items-center justify-center shadow-lg"><Check size={18} /></button>
+                                                    <button onClick={() => handleUpdateStatus(b._id || b.id, 'Contacted')} title="Mark Contacted" className="w-12 h-12 bg-white/5 text-white rounded-2xl hover:bg-[#1DE9B6] hover:text-[#050807] transition-all border border-white/10 flex items-center justify-center shadow-lg"><Mail size={18} /></button>
+                                                    <button onClick={() => handleDelete(b._id || b.id)} title="Delete Lead" className="w-12 h-12 bg-red-500/10 text-red-400 rounded-2xl hover:bg-red-500 hover:text-white transition-all border border-red-500/10 flex items-center justify-center shadow-lg"><Trash2 size={18} /></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -508,6 +540,37 @@ export default function AdminDashboard() {
                 {activeTab === 'Messages' && <Messages key="messages" />}
             </AnimatePresence>
         </div>
+                                    
+        {/* ADD MODAL */}
+        <AnimatePresence>
+            {isAddModalOpen && (
+                <>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setIsAddModalOpen(false)} className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md" />
+                    <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[70] w-full max-w-xl bg-[#0F1716] border border-white/10 rounded-[48px] p-12 shadow-[0_40px_100px_rgba(0,0,0,0.8)]">
+                         <h3 className="text-3xl font-display font-black text-white mb-8">Manual Registry Addition</h3>
+                         <form onSubmit={handleCreateLead} className="space-y-6">
+                            <div className="grid grid-cols-2 gap-6">
+                                <input required placeholder="Client Name" className="bg-white/5 border border-white/5 rounded-2xl p-5 text-white outline-none focus:ring-1 ring-[#1DE9B6] transition-all" value={newLead.name} onChange={e => setNewLead({...newLead, name: e.target.value})} />
+                                <input required placeholder="Contact Number" className="bg-white/5 border border-white/5 rounded-2xl p-5 text-white outline-none focus:ring-1 ring-[#1DE9B6] transition-all" value={newLead.phone} onChange={e => setNewLead({...newLead, phone: e.target.value})} />
+                            </div>
+                            <input required placeholder="Desired Service" className="w-full bg-white/5 border border-white/5 rounded-2xl p-5 text-white outline-none focus:ring-1 ring-[#1DE9B6] transition-all" value={newLead.service} onChange={e => setNewLead({...newLead, service: e.target.value})} />
+                            <div className="grid grid-cols-2 gap-6">
+                                <input required type="date" className="bg-white/5 border border-white/5 rounded-2xl p-5 text-white outline-none focus:ring-1 ring-[#1DE9B6] transition-all [color-scheme:dark]" value={newLead.date} onChange={e => setNewLead({...newLead, date: e.target.value})} />
+                                <input required placeholder="Time (e.g. 10:00 AM)" className="bg-white/5 border border-white/5 rounded-2xl p-5 text-white outline-none focus:ring-1 ring-[#1DE9B6] transition-all" value={newLead.time} onChange={e => setNewLead({...newLead, time: e.target.value})} />
+                            </div>
+                            <select className="w-full bg-white/5 border border-white/5 rounded-2xl p-5 text-white outline-none focus:ring-1 ring-[#1DE9B6] transition-all" value={newLead.type} onChange={e => setNewLead({...newLead, type: e.target.value})}>
+                                <option value="Clinic" className="bg-[#050807]">Clinical Facility</option>
+                                <option value="Home" className="bg-[#050807]">Residential Unit</option>
+                            </select>
+                            <div className="flex gap-4 pt-6">
+                                <button type="button" onClick={() => setIsAddModalOpen(false)} className="flex-1 py-5 rounded-full border border-white/10 text-white font-black text-[10px] uppercase tracking-widest hover:bg-white/5 transition-all">Cancel</button>
+                                <button type="submit" className="flex-1 py-5 rounded-full bg-[#1DE9B6] text-[#050807] font-black text-[10px] uppercase tracking-widest hover:scale-105 transition-all shadow-lg">Authenticate Lead</button>
+                            </div>
+                         </form>
+                    </motion.div>
+                </>
+            )}
+        </AnimatePresence>
       </main>
     </div>
   );
