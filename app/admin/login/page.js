@@ -1,9 +1,11 @@
 'use client';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Mail, Lock, Loader2, ArrowRight, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function AdminLogin() {
+  const router = useRouter();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [status, setStatus] = useState('idle'); // idle, loading, error, success
 
@@ -47,7 +49,7 @@ export default function AdminLogin() {
   };
 
   return (
-    <main className="min-h-screen bg-[#004D4D] flex items-center justify-center p-6 relative overflow-hidden">
+    <main className="min-h-screen bg-[#050807] flex items-center justify-center p-6 relative overflow-hidden">
       {/* Premium Background Elements */}
       <div className="absolute inset-0 pearl-texture opacity-10 pointer-events-none" />
       <div className="absolute top-[-10%] right-[-10%] w-[800px] h-[800px] bg-mint/10 blur-[180px] rounded-full animate-pulse pointer-events-none" />

@@ -21,7 +21,7 @@ const jsonLd = {
   name: '32 Pearls Dental Clinic',
   description: 'Multi-speciality dental clinic in Hulimavu, Bangalore offering dental implants, root canal, teeth cleaning, orthodontic treatment and more.',
   url: 'https://32pearlsdental.in',
-  telephone: '+91-9133983607',
+  telephone: '+91-8296552516',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Number 19/3, D, SLN Building, Basement, Avani Shringeri Nagar, DLF Road, Near Krishna Kuteera Hotel, Puttenahalli, JP Nagar 7th Phase',

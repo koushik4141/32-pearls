@@ -143,7 +143,7 @@ export default function AppointmentForm() {
                   </button>
                 </motion.div>
               ) : (
-                <div className="p-10 md:p-12 relative z-10">
+                <div className="p-6 md:p-12 relative z-10">
                    <h3 className="text-2xl font-display font-black text-white mb-10 tracking-tight">Concierge Booking</h3>
                   <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -200,7 +200,7 @@ export default function AppointmentForm() {
                     </div>
 
                     {/* Visit Type Selection */}
-                    <div className="flex p-1.5 bg-white/5 rounded-[24px] border border-white/5">
+                    <div className="flex flex-col sm:flex-row p-1.5 bg-white/5 rounded-[24px] border border-white/5 gap-2">
                         {['Clinic', 'Home'].map((t) => (
                             <button
                                 key={t}
@@ -213,7 +213,7 @@ export default function AppointmentForm() {
                         ))}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                       <div className="group">
                          <label className="block text-[9px] font-black uppercase tracking-[0.2em] text-[#6F7674] mb-3 ml-1">Preferred Arrival</label>
                         <div className="relative">

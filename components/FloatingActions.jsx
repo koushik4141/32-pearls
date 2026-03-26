@@ -29,7 +29,7 @@ export default function FloatingActions() {
           )}
         </AnimatePresence>
         <motion.a
-          href="tel:+919133983607"
+          href="tel:+918296552516"
           initial={{ opacity: 0, scale: 0, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ delay: 0.8, type: 'spring', bounce: 0.4 }}
@@ -62,7 +62,7 @@ export default function FloatingActions() {
           )}
         </AnimatePresence>
         <motion.a
-          href="https://wa.me/919133983607?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%2032%20Pearls%20Dental%20Clinic"
+          href="https://wa.me/918296552516?text=Hi%2C%20I%20would%20like%20to%20book%20an%20appointment%20at%2032%20Pearls%20Dental%20Clinic"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, scale: 0, y: 20 }}

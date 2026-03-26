@@ -86,17 +86,17 @@ export default function Footer() {
           <div>
             <h4 className="font-black text-white text-[10px] uppercase tracking-[0.3em] mb-10 text-[#D4AF37]">Connect</h4>
             <div className="space-y-6 mb-12">
-              <a href="tel:+919133983607" className="flex items-center gap-5 text-white hover:text-[#1DE9B6] transition-all group">
+              <a href="tel:+918296552516" className="flex items-center gap-5 text-white hover:text-[#1DE9B6] transition-all group">
                 <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-[#1DE9B6]/40 transition-colors">
                   <Phone size={20} className="text-[#1DE9B6]" />
                 </div>
                 <div className="flex flex-col">
                     <span className="text-[10px] font-black uppercase tracking-widest text-[#6F7674]">Call Concierge</span>
-                    <span className="font-black text-lg">+91 91339 83607</span>
+                    <span className="font-black text-lg">+91 82965 52516</span>
                 </div>
               </a>
               <a
-                href="https://wa.me/919133983607"
+                href="https://wa.me/918296552516"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-5 text-white hover:text-[#1DE9B6] transition-all group"
@@ -118,7 +118,7 @@ export default function Footer() {
                 <a href="#" className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/10 text-[#1877F2] hover:bg-[#1877F2]/10 hover:border-[#1877F2]/40 hover:-translate-y-1 transition-all duration-300 group">
                     <Facebook size={20} fill="#1877F2" className="opacity-80 group-hover:opacity-100" />
                 </a>
-                <a href="#" className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 text-white hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
+                <a href="https://www.instagram.com/32pearlsdentalandhealthcare/" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center border border-white/5 text-white hover:bg-white/10 hover:border-white/20 hover:-translate-y-1 transition-all duration-300 overflow-hidden group">
                     <div className="absolute inset-0 bg-gradient-to-tr from-[#833AB4] via-[#FD1D1D] to-[#F56040] opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
                     <Instagram size={20} className="text-[#F56040] group-hover:text-white transition-colors relative z-10" />
                 </a>

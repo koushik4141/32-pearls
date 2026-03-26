@@ -68,11 +68,11 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-8">
               <div className="flex flex-col items-end">
                 <a
-                  href="tel:+919133983607"
+                  href="tel:+918296552516"
                   className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-[#D4AF37] hover:text-white transition-colors"
                 >
                   <Phone size={14} />
-                  <span>+91 91339 83607</span>
+                  <span>+91 82965 52516</span>
                 </a>
                 <span className="text-[8px] font-black uppercase tracking-[0.2em] text-[#1DE9B6] mt-1 flex items-center gap-1.5">
                   <div className="w-1 h-1 rounded-full bg-[#1DE9B6] animate-pulse" />
@@ -121,7 +121,7 @@ export default function Navbar() {
               ))}
               <div className="mt-8 pt-8 border-t border-white/5 flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
-                  <a href="tel:+919133983607" className="flex items-center justify-center gap-3 bg-white/5 py-5 rounded-[24px] text-[10px] font-black uppercase tracking-widest text-white">
+                  <a href="tel:+918296552516" className="flex items-center justify-center gap-3 bg-white/5 py-5 rounded-[24px] text-[10px] font-black uppercase tracking-widest text-white">
                     <Phone size={16} />
                     Call Now
                   </a>

@@ -248,7 +248,7 @@ export default function Doctors() {
           className="mt-32 flex flex-col items-center border-t border-white/5 pt-16"
         >
           <div className="flex flex-wrap justify-center gap-8">
-            <a href="tel:+919876543210" className="flex items-center gap-4 bg-white text-[#050807] px-12 py-6 rounded-full hover:bg-[#1DE9B6] transition-all font-black text-[11px] uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(255,255,255,0.05)] hover:scale-105 active:scale-95">
+            <a href="tel:+918296552516" className="flex items-center gap-4 bg-white text-[#050807] px-12 py-6 rounded-full hover:bg-[#1DE9B6] transition-all font-black text-[11px] uppercase tracking-[0.2em] shadow-[0_20px_40px_rgba(255,255,255,0.05)] hover:scale-105 active:scale-95">
               <Phone size={20} /> Call Premier Clinic
             </a>
             <a href="#appointment" className="flex items-center gap-4 bg-white/5 border border-white/10 text-white px-12 py-6 rounded-full hover:bg-white/10 transition-all font-black text-[11px] uppercase tracking-[0.2em] hover:scale-105 active:scale-95">

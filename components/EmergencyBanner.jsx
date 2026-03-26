@@ -38,7 +38,7 @@ export default function EmergencyBanner() {
           </div>
 
           <motion.a
-            href="tel:+919876543210"
+            href="tel:+918296552516"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             className="flex items-center gap-4 bg-white hover:bg-[#D4AF37] text-[#050807] font-black text-lg px-10 py-5 rounded-[32px] shadow-[0_20px_50px_rgba(255,255,255,0.05)] transition-all duration-300 w-full lg:w-auto justify-center"

@@ -135,14 +135,14 @@ export default function Location() {
                             <h3 className="font-black text-white text-xl uppercase tracking-tighter">Contact</h3>
                         </div>
                         <p className="text-[#A2A9A7] text-[10px] font-black uppercase tracking-widest mb-2">Speak to Us</p>
-                        <p className="text-white font-black text-xl tracking-tight">+91 98765 43210</p>
+                        <p className="text-white font-black text-xl tracking-tight">+91 82965 52516</p>
                     </div>
                     
                     <div className="mt-8 flex flex-col gap-3">
-                        <a href="tel:+919876543210" className="w-full bg-white text-[#050807] text-[10px] font-black uppercase tracking-widest py-4 rounded-full text-center hover:bg-[#1DE9B6] transition-all">
+                        <a href="tel:+918296552516" className="w-full bg-white text-[#050807] text-[10px] font-black uppercase tracking-widest py-4 rounded-full text-center hover:bg-[#1DE9B6] transition-all">
                             Call Now
                         </a>
-                        <a href="https://wa.me/919876543210" className="w-full border border-white/10 bg-white/5 text-white text-[10px] font-black uppercase tracking-widest py-4 rounded-full text-center hover:bg-white/10 transition-all">
+                        <a href="https://wa.me/918296552516" className="w-full border border-white/10 bg-white/5 text-white text-[10px] font-black uppercase tracking-widest py-4 rounded-full text-center hover:bg-white/10 transition-all">
                             WhatsApp
                         </a>
                     </div>
