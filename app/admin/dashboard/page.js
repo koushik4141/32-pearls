@@ -38,72 +38,86 @@ const scheduleSlots = [
 // --- COMPONENTS ---
 
 const Overview = ({ stats, bookings }) => (
-  <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
+  <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="space-y-16">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {[
-        { label: 'System Revenue', value: '₹12,450', icon: TrendingUp, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
-        { label: 'Total Registry', value: stats.total + 450, icon: Users, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
-        { label: 'Active Deployments', value: stats.homeVisits, icon: MapPin, color: 'text-[#D4AF37]', bg: 'bg-[#D4AF37]/10' },
-        { label: 'Patient Loyalty', value: '98%', icon: Smile, color: 'text-white', bg: 'bg-white/10' }
+        { label: 'Clinical Revenue', value: '₹1,24,450', icon: TrendingUp, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
+        { label: 'Patient Registry', value: stats.total + 450, icon: Users, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
+        { label: 'Field Deployments', value: stats.homeVisits, icon: MapPin, color: 'text-[#D4AF37]', bg: 'bg-[#D4AF37]/10' },
+        { label: 'Satisfaction Index', value: '99.2%', icon: Smile, color: 'text-white', bg: 'bg-white/10' }
       ].map((stat, i) => (
-        <div key={i} className="bg-white/[0.03] backdrop-blur-3xl p-8 rounded-[40px] border border-white/5 hover:border-white/10 transition-all group relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full translate-x-12 -translate-y-12 group-hover:bg-[#1DE9B6]/5 transition-all" />
-          <div className="flex items-center justify-between mb-8 relative z-10">
-            <div className={`w-14 h-14 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-              <stat.icon size={24} />
+        <div key={i} className="bg-white/[0.02] backdrop-blur-[100px] p-10 rounded-[48px] border border-white/5 hover:border-white/20 transition-all group relative overflow-hidden shadow-2xl">
+          <div className="absolute top-0 right-0 w-40 h-40 bg-white/5 blur-3xl rounded-full translate-x-16 -translate-y-16 group-hover:bg-[#1DE9B6]/10 transition-all" />
+          <div className="flex items-center justify-between mb-10 relative z-10">
+            <div className={`w-16 h-16 rounded-[22px] ${stat.bg} ${stat.color} flex items-center justify-center group-hover:scale-110 group-hover:rotate-6 transition-all duration-500`}>
+              <stat.icon size={28} />
             </div>
-            <span className="text-[9px] font-black text-[#6F7674] uppercase tracking-widest">+12% VELOCITY</span>
+            <div className="flex flex-col items-end">
+                <span className="text-[10px] font-black text-[#1DE9B6] tracking-tighter">OPTIMIZED</span>
+                <span className="text-[8px] font-medium text-[#6F7674] uppercase tracking-widest mt-1">Live Feed</span>
+            </div>
           </div>
-          <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#6F7674] mb-2 relative z-10">{stat.label}</p>
-          <h2 className="text-4xl font-display font-black text-white relative z-10">{stat.value}</h2>
+          <p className="text-[11px] font-black uppercase tracking-[0.3em] text-[#6F7674] mb-3 relative z-10">{stat.label}</p>
+          <h2 className="text-5xl font-display font-black text-white relative z-10 tracking-tighter">{stat.value}</h2>
         </div>
       ))}
     </div>
 
-    <div className="grid lg:grid-cols-3 gap-10">
-      <div className="lg:col-span-2 bg-white/[0.03] backdrop-blur-3xl rounded-[48px] p-10 border border-white/5">
-        <div className="flex items-center justify-between mb-12">
+    <div className="grid lg:grid-cols-3 gap-12">
+      <div className="lg:col-span-2 bg-white/[0.02] backdrop-blur-[100px] rounded-[64px] p-12 border border-white/5 shadow-2xl relative overflow-hidden group">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#1DE9B6]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+        <div className="flex items-center justify-between mb-16 relative z-10">
           <div>
-            <h3 className="text-2xl font-display font-black text-white tracking-tight">Growth Intelligence</h3>
-            <p className="text-[10px] font-black uppercase tracking-widest text-[#6F7674] mt-2">Analytical Insights across clinical spectrum</p>
+            <h3 className="text-3xl font-display font-black text-white tracking-tighter">Operational Intelligence</h3>
+            <p className="text-[10px] font-black uppercase tracking-widest text-[#6F7674] mt-2">Neural Analysis of clinical throughput</p>
           </div>
-          <select className="bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-[#6F7674] px-6 py-3 outline-none hover:border-white/20 transition-all">
-            <option>Last 7 Cycles</option>
-            <option>Fiscal Quarter</option>
-          </select>
+          <div className="flex gap-4">
+              <div className="px-6 py-3 bg-white/5 rounded-2xl border border-white/5 text-[9px] font-black uppercase tracking-widest text-white flex items-center gap-3">
+                  <div className="w-2 h-2 rounded-full bg-[#1DE9B6] animate-ping" />
+                  Realtime Mode
+              </div>
+          </div>
         </div>
-        <div className="h-72 flex items-end gap-5 px-6 overflow-hidden relative">
+        <div className="h-80 flex items-end gap-6 px-4 overflow-hidden relative">
           <div className="absolute inset-0 flex flex-col justify-between opacity-5">
-            {[...Array(5)].map((_, i) => <div key={i} className="w-full h-px bg-white" />)}
+            {[...Array(6)].map((_, i) => <div key={i} className="w-full h-px bg-white" />)}
           </div>
           {[40, 70, 45, 90, 65, 80, 100].map((h, i) => (
-            <div key={i} className="flex-1 flex flex-col items-center gap-4 group relative z-10">
+            <div key={i} className="flex-1 flex flex-col items-center gap-6 group relative z-10">
+              <div className="absolute -top-10 scale-0 group-hover:scale-100 transition-all bg-white text-[#050807] text-[10px] font-black px-3 py-1.5 rounded-lg mb-2">
+                  {h}%
+              </div>
               <motion.div 
                 initial={{ height: 0 }} 
                 animate={{ height: `${h}%` }} 
-                transition={{ delay: i * 0.1, duration: 1, ease: [0.23, 1, 0.32, 1] }}
-                className="w-full bg-gradient-to-t from-[#1DE9B6] to-[#00BFA5] rounded-t-2xl group-hover:from-white group-hover:to-[#1DE9B6] transition-all shadow-[0_0_20px_rgba(29,233,182,0.1)]"
-              />
-              <span className="text-[9px] font-black text-[#6F7674] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">Phase {i + 1}</span>
+                transition={{ delay: i * 0.1, duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
+                className="w-full bg-gradient-to-t from-[#1DE9B6] to-[#00BFA5] rounded-t-3xl group-hover:from-white group-hover:to-[#1DE9B6] transition-all duration-700 shadow-[0_0_40px_rgba(29,233,182,0.15)] relative"
+              >
+                  <div className="absolute top-0 left-0 right-0 h-4 bg-white/20 rounded-t-3xl blur-sm" />
+              </motion.div>
+              <span className="text-[10px] font-black text-[#6F7674] uppercase tracking-widest opacity-40 group-hover:opacity-100 transition-opacity">CHART {i + 1}</span>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="bg-white/[0.03] backdrop-blur-3xl rounded-[48px] p-10 border border-white/5">
-        <h3 className="text-2xl font-display font-black text-white tracking-tight mb-10">Neural Feed</h3>
-        <div className="space-y-8">
-          {bookings.slice(0, 4).map((b, i) => (
-            <div key={i} className="flex gap-6 items-start pb-8 border-b border-white/5 last:border-0 last:pb-0 group">
-               <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 border border-white/5 group-hover:border-[#1DE9B6]/40 transition-all">
-                  <Activity size={20} className="text-[#1DE9B6]" />
+      <div className="bg-white/[0.02] backdrop-blur-[100px] rounded-[64px] p-12 border border-white/5 shadow-2xl relative overflow-hidden group">
+        <h3 className="text-3xl font-display font-black text-white tracking-tighter mb-12 relative z-10">Neural Response</h3>
+        <div className="space-y-10 relative z-10">
+          {bookings.slice(0, 5).map((b, i) => (
+            <div key={i} className="flex gap-8 items-start pb-10 border-b border-white/5 last:border-0 last:pb-0 group/msg">
+               <div className="w-14 h-14 rounded-[22px] bg-white/5 flex items-center justify-center shrink-0 border border-white/5 group-hover/msg:border-[#1DE9B6]/40 group-hover/msg:bg-[#1DE9B6]/5 transition-all duration-500">
+                  <Activity size={24} className="text-[#1DE9B6] group-hover/msg:scale-110 transition-transform" />
                </div>
                <div className="flex-1">
-                 <p className="text-sm font-black text-white group-hover:text-[#1DE9B6] transition-colors">{b.name}</p>
-                 <p className="text-[10px] text-[#6F7674] font-black uppercase tracking-widest mt-1">Booked {b.service}</p>
-                 <p className="text-[9px] text-[#8E9391] mt-2 font-medium">{b.date}</p>
+                 <p className="text-base font-black text-white group-hover/msg:text-[#1DE9B6] transition-colors tracking-tight">{b.name}</p>
+                 <p className="text-[11px] text-[#6F7674] font-black uppercase tracking-widest mt-2">Assigned to {b.service}</p>
+                 <div className="flex items-center gap-3 mt-3">
+                    <Clock size={10} className="text-[#8E9391]" />
+                    <p className="text-[10px] text-[#8E9391] font-medium">{b.date}</p>
+                 </div>
                </div>
-               <div className="w-2 h-2 rounded-full bg-[#1DE9B6] shadow-[0_0_10px_#1DE9B6]" />
+               <div className="w-2.5 h-2.5 rounded-full bg-[#1DE9B6] shadow-[0_0_15px_#1DE9B6] group-hover/msg:animate-ping" />
             </div>
           ))}
         </div>
@@ -436,77 +450,81 @@ export default function AdminDashboard() {
   return (
     <div className="min-h-screen bg-[#050807] flex font-sans text-white selection:bg-[#1DE9B6] selection:text-[#050807]">
       {/* Sidebar */}
-      <aside className={`fixed inset-y-0 left-0 z-50 w-80 bg-black/40 backdrop-blur-3xl border-r border-white/5 text-white transition-transform duration-300 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0`}>
-        <div className="p-10 h-full flex flex-col">
-          <div className="flex items-center gap-5 mb-20 group">
-            <div className="w-14 h-14 bg-gradient-to-br from-[#1DE9B6] to-[#00BFA5] rounded-2xl flex items-center justify-center shadow-[0_10px_30px_rgba(29,233,182,0.2)]">
-              <ShieldCheck size={32} className="text-[#050807]" />
+      <aside className={`fixed inset-y-0 left-0 z-50 w-96 bg-black/60 backdrop-blur-[120px] border-r border-white/5 text-white transition-transform duration-500 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:translate-x-0`}>
+        <div className="p-12 h-full flex flex-col">
+          <div className="flex items-center gap-6 mb-24 group px-2">
+            <div className="w-16 h-16 bg-gradient-to-br from-[#1DE9B6] to-[#00BFA5] rounded-[22px] flex items-center justify-center shadow-[0_20px_40px_rgba(29,233,182,0.3)] group-hover:scale-110 transition-transform duration-700">
+              <ShieldCheck size={36} className="text-[#050807]" />
             </div>
             <div>
-              <h2 className="text-2xl font-display font-black tracking-tight leading-tight">32 Pearls</h2>
-              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#1DE9B6] opacity-80">Elite HQ Console</p>
+              <h2 className="text-3xl font-display font-black tracking-tighter leading-tight text-white group-hover:text-[#1DE9B6] transition-colors">32 Pearls</h2>
+              <p className="text-[11px] font-black uppercase tracking-[0.4em] text-[#6F7674]">Global HQ Console</p>
             </div>
           </div>
 
-          <nav className="space-y-4 flex-1">
+          <nav className="space-y-6 flex-1">
             {navItems.map((item) => (
               <button
                 key={item.name}
                 onClick={() => setActiveTab(item.name)}
-                className={`w-full flex items-center gap-5 px-8 py-5 rounded-[24px] text-xs font-black uppercase tracking-widest transition-all duration-500 border ${activeTab === item.name ? 'bg-white text-[#050807] border-white shadow-[0_20px_40px_rgba(255,255,255,0.1)]' : 'text-[#6F7674] hover:text-white hover:bg-white/5 border-transparent'}`}
+                className={`w-full flex items-center gap-6 px-10 py-6 rounded-[32px] text-xs font-black uppercase tracking-[0.2em] transition-all duration-700 group border ${activeTab === item.name ? 'bg-white text-[#050807] border-white shadow-[0_30px_60px_rgba(255,255,255,0.1)]' : 'text-[#6F7674] hover:text-white hover:bg-white/5 border-transparent'}`}
               >
-                 <item.icon size={18} />
+                 <item.icon size={22} className={`${activeTab === item.name ? 'text-[#050807]' : 'text-[#1DE9B6] group-hover:scale-110'} transition-all`} />
                  {item.name}
               </button>
             ))}
           </nav>
 
-          <button onClick={handleLogout} className="mt-12 flex items-center gap-4 text-[#FF4D4D] hover:text-white transition-all font-black text-[10px] uppercase tracking-[0.3em] group">
-            <div className="w-10 h-10 rounded-xl bg-red-500/10 flex items-center justify-center group-hover:bg-red-500/20 transition-all">
-                <LogOut size={16} /> 
+          <button onClick={handleLogout} className="mt-12 flex items-center gap-6 px-10 py-6 text-[#FF4D4D] hover:text-white transition-all font-black text-[11px] uppercase tracking-[0.4em] group/logout border border-transparent hover:border-red-500/20 rounded-[32px] hover:bg-red-500/5">
+            <div className="w-12 h-12 rounded-[18px] bg-red-500/10 flex items-center justify-center group-hover/logout:bg-red-500 transition-all">
+                <LogOut size={20} className="group-hover/logout:text-white transition-all" /> 
             </div>
-            Terminate Session
+            Terminal Logout
           </button>
         </div>
       </aside>
 
       {/* Main Content Area */}
       <main className="flex-1 flex flex-col h-screen overflow-hidden relative">
-        {/* Dynamic Background Effects */}
-        <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#1DE9B6]/5 blur-[200px] rounded-full pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4AF37]/5 blur-[150px] rounded-full pointer-events-none" />
+        {/* Advanced Background Effects */}
+        <div className="absolute top-0 right-0 w-[1200px] h-[1200px] bg-[#1DE9B6]/5 blur-[250px] rounded-full pointer-events-none animate-pulse" />
+        <div className="absolute top-[20%] left-[20%] w-[800px] h-[800px] bg-[#D4AF37]/5 blur-[200px] rounded-full pointer-events-none" />
+        <div className="absolute -bottom-20 -right-20 w-[600px] h-[600px] bg-white/5 blur-[150px] rounded-full pointer-events-none animate-bounce duration-[10s]" />
 
-        <header className="h-28 bg-black/20 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-12 shrink-0 relative z-20">
-          <div className="flex items-center gap-8">
-            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="lg:hidden p-4 rounded-2xl bg-white/5 border border-white/10 text-white">
-                {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+        <header className="h-32 bg-black/40 backdrop-blur-[100px] border-b border-white/5 flex items-center justify-between px-16 shrink-0 relative z-20">
+          <div className="flex items-center gap-12">
+            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="lg:hidden p-5 rounded-2xl bg-white/5 border border-white/10 text-white">
+                {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
             <div>
-                <h1 className="text-3xl font-display font-black text-white tracking-tighter">{activeTab}</h1>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#6F7674] mt-1">Real-time Operations Control</p>
+                <h1 className="text-4xl font-display font-black text-white tracking-tighter leading-none">{activeTab}</h1>
+                <p className="text-[11px] font-black uppercase tracking-[0.4em] text-[#6F7674] mt-2 flex items-center gap-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#1DE9B6] animate-pulse" />
+                    Global Operations Protocol 2.0
+                </p>
             </div>
           </div>
 
-          <div className="flex items-center gap-10">
+          <div className="flex items-center gap-12">
             <div className="relative group hidden md:block">
-                <div className="p-3 bg-white/5 rounded-2xl border border-white/10 hover:border-[#1DE9B6]/40 transition-all cursor-pointer">
-                    <Bell size={20} className="text-[#6F7674] group-hover:text-[#1DE9B6]" />
-                    <div className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-[#050807]" />
+                <div className="p-4 bg-white/5 rounded-2xl border border-white/10 hover:border-[#1DE9B6]/40 transition-all cursor-pointer group-hover:scale-105">
+                    <Bell size={24} className="text-[#6F7674] group-hover:text-[#1DE9B6]" />
+                    <div className="absolute top-3 right-3 w-2.5 h-2.5 bg-red-500 rounded-full border-4 border-[#050807]" />
                 </div>
             </div>
-            <div className="flex items-center gap-5 pl-10 border-l border-white/5">
+            <div className="flex items-center gap-8 pl-12 border-l border-white/5">
                 <div className="text-right">
-                    <p className="text-sm font-black text-white">{adminName}</p>
-                    <p className="text-[10px] uppercase font-black text-[#D4AF37] tracking-widest">Master Protocol</p>
+                    <p className="text-base font-black text-white tracking-tight">{adminName}</p>
+                    <p className="text-[10px] uppercase font-black text-[#D4AF37] tracking-[0.3em]">Master Administrator</p>
                 </div>
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-[1px] shadow-2xl">
-                    <div className="w-full h-full rounded-[14px] bg-[#050807] flex items-center justify-center font-black text-white text-xs">HQ</div>
+                <div className="w-16 h-16 rounded-[22px] bg-gradient-to-br from-white/10 to-white/5 p-[1px] shadow-2xl group hover:scale-110 transition-transform duration-500">
+                    <div className="w-full h-full rounded-[21px] bg-[#050807] flex items-center justify-center font-black text-white text-sm border border-white/5">HQ</div>
                 </div>
             </div>
           </div>
         </header>
 
-        <div className="flex-1 p-12 overflow-y-auto relative z-10 custom-scrollbar pb-20">
+        <div className="flex-1 p-16 overflow-y-auto relative z-10 custom-scrollbar pb-32">
             <AnimatePresence mode="wait">
                 {activeTab === 'Overview' && <Overview stats={stats} bookings={bookings} key="overview" />}
                 {activeTab === 'Patient Leads' && (
