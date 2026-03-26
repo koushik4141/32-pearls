@@ -40,10 +40,10 @@ const Overview = ({ stats, bookings }) => (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {[
-        { label: 'System Revenue', value: '₹12,450', icon: TrendingUp, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
-        { label: 'Total Registry', value: stats.total + 450, icon: Users, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
+        { label: 'System Revenue', value: '₹0', icon: TrendingUp, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
+        { label: 'Total Registry', value: stats.total, icon: Users, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
         { label: 'Active Deployments', value: stats.homeVisits, icon: MapPin, color: 'text-[#D4AF37]', bg: 'bg-[#D4AF37]/10' },
-        { label: 'Patient Loyalty', value: '98%', icon: Smile, color: 'text-white', bg: 'bg-white/10' }
+        { label: 'Patient Loyalty', value: '0%', icon: Smile, color: 'text-white', bg: 'bg-white/10' }
       ].map((stat, i) => (
         <div key={i} className="bg-white/[0.03] backdrop-blur-3xl p-8 rounded-[40px] border border-white/5 hover:border-white/10 transition-all group relative overflow-hidden">
           <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 blur-3xl rounded-full translate-x-12 -translate-y-12 group-hover:bg-[#1DE9B6]/5 transition-all" />
@@ -51,7 +51,7 @@ const Overview = ({ stats, bookings }) => (
             <div className={`w-14 h-14 rounded-2xl ${stat.bg} ${stat.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
               <stat.icon size={24} />
             </div>
-            <span className="text-[9px] font-black text-[#6F7674] uppercase tracking-widest">+12% VELOCITY</span>
+            <span className="text-[9px] font-black text-[#6F7674] uppercase tracking-widest">+0% VELOCITY</span>
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#6F7674] mb-2 relative z-10">{stat.label}</p>
           <h2 className="text-4xl font-display font-black text-white relative z-10">{stat.value}</h2>
@@ -111,52 +111,85 @@ const Overview = ({ stats, bookings }) => (
   </motion.div>
 );
 
-const Schedule = () => (
-    <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/[0.03] backdrop-blur-3xl rounded-[48px] p-10 border border-white/5 shadow-2xl relative overflow-hidden group">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#1DE9B6]/5 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
-        
-        <div className="flex flex-wrap items-center justify-between gap-8 mb-12 relative z-10">
-            <div>
-                <h3 className="text-3xl font-display font-black text-white tracking-tighter">Clinical Operations</h3>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#6F7674] mt-2">Managing Protocol for {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
-            </div>
-            <div className="flex gap-2 bg-white/5 p-2 rounded-2xl border border-white/5">
-                {['Cycle', 'Phase', 'Quarter'].map(t => (
-                    <button 
-                        key={t} 
-                        className={`px-8 py-3 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${t === 'Cycle' ? 'bg-white text-[#050807] shadow-xl' : 'text-[#6F7674] hover:text-white'}`}
-                    >
-                        {t}
-                    </button>
-                ))}
-            </div>
-        </div>
+const Schedule = ({ bookings }) => {
+    const today = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long' });
+    const todayBookings = bookings.filter(b => b.date.includes(today) || b.date === new Date().toISOString().split('T')[0]);
 
-        <div className="space-y-4 relative z-10">
-            {scheduleSlots.map((slot, i) => (
-                <div key={i} className={`flex items-center gap-10 p-8 rounded-[32px] border transition-all duration-500 group/slot ${slot.status === 'busy' ? 'bg-white/[0.05] border-white/10 shadow-xl' : slot.status === 'break' ? 'bg-black/20 border-transparent opacity-40' : 'bg-white/[0.02] border-dashed border-white/10 hover:border-[#1DE9B6]/40'}`}>
-                    <div className="w-24 text-xs font-black text-[#6F7674] uppercase tracking-widest group-hover/slot:text-[#1DE9B6] transition-colors">{slot.time}</div>
-                    <div className="flex-1">
-                        {slot.status === 'busy' ? (
-                            <div className="flex items-center gap-6">
-                                <div className="w-14 h-14 rounded-2xl bg-[#1DE9B6] text-[#050807] flex items-center justify-center font-black text-xs shadow-[0_10px_20px_rgba(29,233,182,0.2)]">{slot.patient.charAt(0)}</div>
-                                <div>
-                                    <h5 className="text-lg font-black text-white tracking-tight leading-none mb-2">{slot.patient}</h5>
-                                    <p className="text-[10px] uppercase font-black text-[#1DE9B6] tracking-[0.2em]">{slot.service} ACTIVE</p>
-                                </div>
-                            </div>
-                        ) : (
-                            <p className={`text-sm font-black uppercase tracking-widest ${slot.status === 'break' ? 'text-[#6F7674] italic' : 'text-[#D4AF37]'}`}>{slot.patient === 'Available' ? 'Ready for Deployment' : slot.patient}</p>
-                        )}
+    const doctors = [
+        { name: 'Dr. Reshma', img: '/doctors/reshma.jpg', hours: '08:00 AM - 10:00 PM' },
+        { name: 'Dr. Suhail', img: '/doctors/suhail.png', hours: '10:30 AM - 01:00 PM' },
+        { name: 'Dr. Shraddha', img: '/doctors/shraddha.jpg', hours: '01:00 PM - 03:00 PM' },
+        { name: 'Dr. Vikas', img: '/doctors/vikas.jpg', hours: '08:00 AM - 10:00 PM' }
+    ];
+
+    const generateTimeline = () => {
+        const slots = [];
+        for (let i = 8; i <= 21; i++) {
+            const hour = i > 12 ? i - 12 : i;
+            const ampm = i >= 12 ? 'PM' : 'AM';
+            const timeStr = `${hour.toString().padStart(2, '0')}:00 ${ampm}`;
+            
+            // Find patient for this slot
+            const appointment = todayBookings.find(b => b.time.includes(`${hour}:00`) || b.time.includes(`${hour}:30`) || b.time.includes(`${hour.toString().padStart(2, '0')}:00`));
+            
+            // Find active doctors for this slot
+            const activeDoctors = doctors.filter(doc => {
+                const [start, end] = doc.hours.split(' - ');
+                const startHour = parseInt(start.split(':')[0]) + (start.includes('PM') && !start.startsWith('12') ? 12 : 0);
+                const endHour = parseInt(end.split(':')[0]) + (end.includes('PM') && !end.startsWith('12') ? 12 : 0);
+                return i >= startHour && i < endHour;
+            });
+
+            slots.push({ time: timeStr, appointment, doctors: activeDoctors });
+        }
+        return slots;
+    };
+
+    const timeline = generateTimeline();
+
+    return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-12">
+            <div className="bg-white/[0.03] backdrop-blur-3xl rounded-[48px] p-6 md:p-10 border border-white/5 shadow-2xl overflow-hidden">
+                <div className="flex flex-wrap items-center justify-between gap-8 mb-12">
+                    <div>
+                        <h3 className="text-3xl font-display font-black text-white tracking-tighter">Clinical Timeline</h3>
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#6F7674] mt-2">Active Operations for {today}</p>
                     </div>
-                    {slot.status === 'free' && (
-                        <button className="px-8 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-[#050807] transition-all duration-500 shadow-lg">Assign Lead</button>
-                    )}
                 </div>
-            ))}
-        </div>
-    </motion.div>
-);
+
+                <div className="space-y-6">
+                    {timeline.map((slot, i) => (
+                        <div key={i} className={`flex flex-col md:flex-row md:items-center gap-6 md:gap-10 p-6 md:p-8 rounded-[32px] border transition-all duration-500 ${slot.appointment ? 'bg-white/[0.05] border-[#1DE9B6]/20' : 'bg-white/[0.01] border-white/5'}`}>
+                            <div className="w-24 text-xs font-black text-[#6F7674] uppercase tracking-widest">{slot.time}</div>
+                            
+                            <div className="flex-1">
+                                {slot.appointment ? (
+                                    <div className="flex items-center gap-5">
+                                        <div className="w-12 h-12 rounded-2xl bg-[#1DE9B6] text-[#050807] flex items-center justify-center font-black text-sm uppercase">{slot.appointment.name.charAt(0)}</div>
+                                        <div>
+                                            <h5 className="text-base font-black text-white tracking-tight">{slot.appointment.name}</h5>
+                                            <p className="text-[9px] uppercase font-black text-[#1DE9B6] tracking-[0.2em]">{slot.appointment.service}</p>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <p className="text-[10px] font-black uppercase tracking-widest text-[#6F7674] opacity-40 italic">No Active Deployments</p>
+                                )}
+                            </div>
+
+                            <div className="flex -space-x-4">
+                                {slot.doctors.map((doc, di) => (
+                                    <div key={di} className="relative group/doc w-12 h-12 rounded-xl border-2 border-[#050807] overflow-hidden bg-white/10" title={doc.name}>
+                                        <Image src={doc.img} alt={doc.name} fill className="object-cover group-hover/doc:scale-110 transition-transform" />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </motion.div>
+    );
+};
 
 const Messages = () => (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/[0.03] backdrop-blur-3xl rounded-[32px] md:rounded-[48px] border border-white/5 shadow-2xl flex flex-col lg:flex-row h-auto lg:h-[750px] overflow-hidden">
@@ -543,7 +576,7 @@ export default function AdminDashboard() {
                         </div>
                     </motion.div>
                 )}
-                {activeTab === 'Schedule' && <Schedule key="schedule" />}
+                {activeTab === 'Schedule' && <Schedule bookings={bookings} key="schedule" />}
                 {activeTab === 'Messages' && <Messages key="messages" />}
             </AnimatePresence>
         </div>
