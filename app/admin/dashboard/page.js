@@ -159,9 +159,9 @@ const Schedule = () => (
 );
 
 const Messages = () => (
-    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/[0.03] backdrop-blur-3xl rounded-[48px] border border-white/5 shadow-2xl flex h-[750px] overflow-hidden">
+    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/[0.03] backdrop-blur-3xl rounded-[32px] md:rounded-[48px] border border-white/5 shadow-2xl flex flex-col lg:flex-row h-auto lg:h-[750px] overflow-hidden">
         {/* Contact List */}
-        <div className="w-96 border-r border-white/5 flex flex-col bg-black/20">
+        <div className="w-full lg:w-96 border-b lg:border-b-0 lg:border-r border-white/5 flex flex-col bg-black/20 h-[300px] lg:h-full">
             <div className="p-8 border-b border-white/5 bg-black/20">
                 <div className="relative group">
                     <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-[#6F7674] group-focus-within:text-[#1DE9B6] transition-colors" size={18} />
@@ -234,7 +234,7 @@ export default function AdminDashboard() {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [adminName, setAdminName] = useState('Admin');
   const router = useRouter();
@@ -402,42 +402,42 @@ export default function AdminDashboard() {
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-[#1DE9B6]/5 blur-[200px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#D4AF37]/5 blur-[150px] rounded-full pointer-events-none" />
 
-        <header className="h-28 bg-black/20 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-12 shrink-0 relative z-20">
-          <div className="flex items-center gap-8">
-            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="lg:hidden p-4 rounded-2xl bg-white/5 border border-white/10 text-white">
-                {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+        <header className="h-20 md:h-28 bg-black/20 backdrop-blur-2xl border-b border-white/5 flex items-center justify-between px-6 md:px-12 shrink-0 relative z-20">
+          <div className="flex items-center gap-4 md:gap-8">
+            <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="lg:hidden p-3 md:p-4 rounded-xl md:rounded-2xl bg-white/5 border border-white/10 text-white">
+                {isSidebarOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
             <div>
-                <h1 className="text-3xl font-display font-black text-white tracking-tighter">{activeTab}</h1>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#6F7674] mt-1">Real-time Operations Control</p>
+                <h1 className="text-xl md:text-3xl font-display font-black text-white tracking-tighter">{activeTab}</h1>
+                <p className="hidden md:block text-[10px] font-black uppercase tracking-[0.3em] text-[#6F7674] mt-1">Real-time Operations Control</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-10">
-            <div className="relative group hidden md:block">
+          <div className="flex items-center gap-6 md:gap-10">
+            <div className="relative group hidden sm:block">
                 <div className="p-3 bg-white/5 rounded-2xl border border-white/10 hover:border-[#1DE9B6]/40 transition-all cursor-pointer">
-                    <Bell size={20} className="text-[#6F7674] group-hover:text-[#1DE9B6]" />
-                    <div className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-[#050807]" />
+                    <Bell size={18} className="text-[#6F7674] group-hover:text-[#1DE9B6]" />
+                    <div className="absolute top-2 right-2 w-1.5 h-1.5 md:w-2 md:h-2 bg-red-500 rounded-full border-2 border-[#050807]" />
                 </div>
             </div>
-            <div className="flex items-center gap-5 pl-10 border-l border-white/5">
-                <div className="text-right">
-                    <p className="text-sm font-black text-white">{adminName}</p>
-                    <p className="text-[10px] uppercase font-black text-[#D4AF37] tracking-widest">Master Protocol</p>
+            <div className="flex items-center gap-3 md:gap-5 pl-6 md:pl-10 border-l border-white/5">
+                <div className="text-right hidden sm:block">
+                    <p className="text-xs md:text-sm font-black text-white">{adminName}</p>
+                    <p className="text-[8px] md:text-[10px] uppercase font-black text-[#D4AF37] tracking-widest">Master Protocol</p>
                 </div>
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-[1px] shadow-2xl">
-                    <div className="w-full h-full rounded-[14px] bg-[#050807] flex items-center justify-center font-black text-white text-xs">HQ</div>
+                <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl md:rounded-2xl bg-gradient-to-br from-white/10 to-white/5 p-[1px] shadow-2xl">
+                    <div className="w-full h-full rounded-[10px] md:rounded-[14px] bg-[#050807] flex items-center justify-center font-black text-white text-[10px] md:text-xs">HQ</div>
                 </div>
             </div>
           </div>
         </header>
 
-        <div className="flex-1 p-12 overflow-y-auto relative z-10 custom-scrollbar pb-20">
+        <div className="flex-1 p-6 md:p-12 overflow-y-auto relative z-10 custom-scrollbar pb-20">
             <AnimatePresence mode="wait">
                 {activeTab === 'Overview' && <Overview stats={stats} bookings={bookings} key="overview" />}
                 {activeTab === 'Patient Leads' && (
-                    <motion.div key="leads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white/[0.03] backdrop-blur-3xl rounded-[48px] border border-white/5 overflow-hidden h-[850px] flex flex-col shadow-2xl">
-                        <div className="p-10 border-b border-white/5 flex flex-wrap items-center justify-between gap-8">
+                    <motion.div key="leads" initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white/[0.03] backdrop-blur-3xl rounded-[32px] md:rounded-[48px] border border-white/5 overflow-hidden h-auto lg:h-[850px] flex flex-col shadow-2xl">
+                        <div className="p-6 md:p-10 border-b border-white/5 flex flex-wrap items-center justify-between gap-6 md:gap-8">
                             <div className="relative w-full md:w-[450px] group">
                                 <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-[#6F7674] group-focus-within:text-[#1DE9B6] transition-colors" size={20} />
                                 <input type="text" placeholder="Scan clinical registry..." className="w-full bg-white/5 border border-white/5 rounded-2xl py-5 pl-16 pr-6 text-sm outline-none focus:ring-2 ring-[#1DE9B6]/20 transition-all font-black uppercase tracking-widest placeholder:text-[#6F7674] text-white" value={search} onChange={(e) => setSearch(e.target.value)} />
@@ -455,7 +455,8 @@ export default function AdminDashboard() {
                             </div>
                         </div>
                         <div className="flex-1 overflow-y-auto custom-scrollbar">
-                            <table className="w-full text-left">
+                            {/* Desktop Table View */}
+                            <table className="w-full text-left hidden md:table">
                                 <thead className="bg-black/20 text-[10px] font-black uppercase tracking-[0.3em] text-[#6F7674] border-b border-white/5">
                                     <tr>
                                         <th className="px-12 py-8">Medical Profile</th>
@@ -501,6 +502,44 @@ export default function AdminDashboard() {
                                     ))}
                                 </tbody>
                             </table>
+
+                            {/* Mobile Card View */}
+                            <div className="md:hidden p-6 space-y-6">
+                                {filteredBookings.map((b) => (
+                                    <div key={b._id || b.id} className="bg-white/[0.03] p-6 rounded-3xl border border-white/5 space-y-6">
+                                        <div className="flex items-center justify-between">
+                                            <div className="flex items-center gap-4">
+                                                <div className="w-10 h-10 rounded-xl bg-[#1DE9B6]/10 flex items-center justify-center font-black text-[#1DE9B6] border border-[#1DE9B6]/10">{b.name.charAt(0)}</div>
+                                                <div>
+                                                    <p className="font-black text-white text-sm tracking-tight">{b.name}</p>
+                                                    <p className="text-[9px] font-black text-[#6F7674] uppercase tracking-widest">{b.phone}</p>
+                                                </div>
+                                            </div>
+                                            <span className={`px-4 py-1.5 rounded-full text-[8px] font-black uppercase tracking-[0.2em] ${b.status === 'Pending' ? 'bg-orange-500/10 text-orange-400' : 'bg-[#1DE9B6]/10 text-[#1DE9B6]'} border border-current/10`}>
+                                                {b.status}
+                                            </span>
+                                        </div>
+                                        <div className="pt-4 border-t border-white/5 grid grid-cols-2 gap-4 text-[9px] font-black uppercase tracking-widest">
+                                            <div>
+                                                <p className="text-[#6F7674] mb-1">Service</p>
+                                                <p className="text-white">{b.service}</p>
+                                            </div>
+                                            <div>
+                                                <p className="text-[#6F7674] mb-1">Deployment</p>
+                                                <p className="text-white">{b.type}</p>
+                                            </div>
+                                            <div className="col-span-2">
+                                                <p className="text-[#6F7674] mb-1">Slot</p>
+                                                <p className="text-[#8E9391]">{b.date} · {b.time}</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-2 pt-2">
+                                            <button onClick={() => handleUpdateStatus(b._id || b.id, 'Contacted')} className="flex-1 py-4 bg-white/5 text-white rounded-2xl hover:bg-[#1DE9B6] hover:text-[#050807] transition-all border border-white/10 flex items-center justify-center gap-2 text-[10px] font-black uppercase tracking-widest"><Mail size={14} /> Contact</button>
+                                            <button onClick={() => handleDelete(b._id || b.id)} className="w-14 py-4 bg-red-500/10 text-red-400 rounded-2xl hover:bg-red-500 hover:text-white transition-all border border-red-500/10 flex items-center justify-center"><Trash2 size={14} /></button>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     </motion.div>
                 )}

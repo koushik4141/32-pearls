@@ -44,7 +44,7 @@ export default function Footer() {
                 </div>
                 <div className="flex items-start gap-4 text-[#8E9391] text-xs font-black uppercase tracking-widest">
                 <MapPin size={16} className="text-[#1DE9B6] mt-0.5" />
-                <span>Puttenahalli, JP Nagar 7th Phase, <br/>J. P. Nagar Bengaluru, 560078</span>
+                <span>2, 19/3D, Basement, SLN Building, <br/>Dr. Puneeth Rajkumar Circle, Bengaluru, 560076</span>
                 </div>
             </div>
           </div>

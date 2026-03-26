@@ -83,13 +83,13 @@ export default function Location() {
                 <div>
                   <h3 className="font-black text-white text-2xl mb-4">Clinic Address</h3>
                   <p className="text-[#A2A9A7] leading-relaxed text-base font-medium">
-                    Number 19/3, D, SLN Building, Basement<br />
-                    Avani Shringeri Nagar, DLF Road<br />
+                    2, 19/3D, SLN Building, Basement<br />
+                    Dr. Puneeth Raj Kumar Circle, DLF Road<br />
                     Near Krishna Kuteera Hotel<br />
-                    <strong className="text-white block mt-2 text-lg">Hulimavu, Bangalore, Karnataka – 560 076</strong>
+                    <strong className="text-white block mt-2 text-lg">Bengaluru, Karnataka – 560 076</strong>
                   </p>
                   <a
-                    href="https://maps.google.com/?q=Hulimavu,Bangalore,Karnataka"
+                    href="https://maps.google.com/?q=32+Pearls+Dental+Clinic+SLN+Building+Bengaluru"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 mt-8 bg-[#1DE9B6]/10 hover:bg-[#1DE9B6] text-[#1DE9B6] hover:text-[#050807] px-8 py-4 rounded-full text-[10px] font-black uppercase tracking-widest transition-all"
