@@ -302,14 +302,11 @@ export default function AdminDashboard() {
 
       const data = await resp.json();
       
-      if (data.success && data.data.length > 0) {
-        setBookings(data.data);
-      } else {
-        setBookings(mockPatients);
+      if (data.success) {
+        setBookings(data.data || []);
       }
     } catch (e) { 
-      console.warn('Protocol sync failed. Utilizing offline registry.');
-      setBookings(mockPatients);
+      console.warn('Protocol sync failed.');
     }
     setLoading(false);
   };
@@ -326,6 +323,8 @@ export default function AdminDashboard() {
     
     if (name) setAdminName(name);
     fetchBookings(); 
+    const interval = setInterval(fetchBookings, 30000);
+    return () => clearInterval(interval);
   }, []);
 
   const stats = {
