@@ -9,6 +9,7 @@ import {
   TrendingUp, Activity, Bell, UserPlus, FileText, Send, 
   Check, MoreHorizontal, Smile, MapPin
 } from 'lucide-react';
+import Image from 'next/image';
 
 // --- MOCK DATA ---
 const mockPatients = [
@@ -130,7 +131,7 @@ const Schedule = ({ bookings }) => {
             const timeStr = `${hour.toString().padStart(2, '0')}:00 ${ampm}`;
             
             // Find patient for this slot
-            const appointment = todayBookings.find(b => b.time.includes(`${hour}:00`) || b.time.includes(`${hour}:30`) || b.time.includes(`${hour.toString().padStart(2, '0')}:00`));
+            const appointment = todayBookings.find(b => b.time?.includes(`${hour}:00`) || b.time?.includes(`${hour}:30`) || b.time?.includes(`${hour.toString().padStart(2, '0')}:00`));
             
             // Find active doctors for this slot
             const activeDoctors = doctors.filter(doc => {
