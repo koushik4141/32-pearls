@@ -111,52 +111,97 @@ const Overview = ({ stats, bookings }) => (
   </motion.div>
 );
 
-const Schedule = () => (
-    <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="bg-white/[0.03] backdrop-blur-3xl rounded-[48px] p-10 border border-white/5 shadow-2xl relative overflow-hidden group">
-        <div className="absolute top-0 right-0 w-64 h-64 bg-[#1DE9B6]/5 blur-[100px] rounded-full translate-x-1/2 -translate-y-1/2" />
-        
-        <div className="flex flex-wrap items-center justify-between gap-8 mb-12 relative z-10">
-            <div>
-                <h3 className="text-3xl font-display font-black text-white tracking-tighter">Clinical Operations</h3>
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#6F7674] mt-2">Managing Protocol for {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
-            </div>
-            <div className="flex gap-2 bg-white/5 p-2 rounded-2xl border border-white/5">
-                {['Cycle', 'Phase', 'Quarter'].map(t => (
-                    <button 
-                        key={t} 
-                        className={`px-8 py-3 rounded-xl text-[9px] font-black uppercase tracking-[0.2em] transition-all duration-500 ${t === 'Cycle' ? 'bg-white text-[#050807] shadow-xl' : 'text-[#6F7674] hover:text-white'}`}
-                    >
-                        {t}
-                    </button>
+const Schedule = ({ bookings }) => {
+    const today = new Date().toISOString().split('T')[0];
+    const todayBookings = bookings.filter(b => b.date === today || b.date.includes(new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long' })));
+    
+    const operationalDoctors = [
+      { name: 'Dr. Reshma', role: 'Prime Surgeon', image: '/doctors/reshma.jpg', active: true },
+      { name: 'Dr. Suhail', role: 'Endodontist', image: '/doctors/suhail.png', active: true },
+      { name: 'Dr. Akhil', role: 'Oral Surgeon', image: '/doctors/akhil.jpg', active: false },
+      { name: 'Dr. Vikas', role: 'Orthodontist', image: '/doctors/vikas.jpg', active: true },
+    ];
+
+    const generateTimeline = () => {
+        const slots = [];
+        for(let i = 9; i <= 21; i++) {
+            const timeStr = `${i > 12 ? i - 12 : i}:00 ${i >= 12 ? 'PM' : 'AM'}`;
+            const appointment = todayBookings.find(b => b.time.includes(timeStr.replace(':00 ', ' ')));
+            slots.push({
+                time: timeStr,
+                appointment: appointment || null,
+                status: appointment ? 'busy' : (i === 13 ? 'break' : 'free')
+            });
+        }
+        return slots;
+    };
+
+    const timeline = generateTimeline();
+
+    return (
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-12">
+            {/* Doctor Roster */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                {operationalDoctors.map((doc, i) => (
+                    <div key={i} className={`bg-white/[0.03] backdrop-blur-3xl p-6 rounded-[32px] border border-white/5 flex items-center gap-5 group transition-all ${doc.active ? 'hover:border-[#1DE9B6]/40' : 'opacity-50 grayscale'}`}>
+                        <div className="relative w-16 h-16 shrink-0">
+                            <Image src={doc.image} alt={doc.name} fill className="object-cover rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-500" />
+                            {doc.active && <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#1DE9B6] rounded-full border-4 border-[#050807] animate-pulse" />}
+                        </div>
+                        <div>
+                            <h4 className="text-sm font-black text-white group-hover:text-[#1DE9B6] transition-colors">{doc.name}</h4>
+                            <p className="text-[9px] font-black uppercase tracking-widest text-[#6F7674] mt-1">{doc.role}</p>
+                            <p className={`text-[8px] font-black uppercase tracking-[0.2em] mt-2 ${doc.active ? 'text-[#1DE9B6]' : 'text-red-500'}`}>{doc.active ? 'ON DUTY' : 'OFFLINE'}</p>
+                        </div>
+                    </div>
                 ))}
             </div>
-        </div>
 
-        <div className="space-y-4 relative z-10">
-            {scheduleSlots.map((slot, i) => (
-                <div key={i} className={`flex items-center gap-10 p-8 rounded-[32px] border transition-all duration-500 group/slot ${slot.status === 'busy' ? 'bg-white/[0.05] border-white/10 shadow-xl' : slot.status === 'break' ? 'bg-black/20 border-transparent opacity-40' : 'bg-white/[0.02] border-dashed border-white/10 hover:border-[#1DE9B6]/40'}`}>
-                    <div className="w-24 text-xs font-black text-[#6F7674] uppercase tracking-widest group-hover/slot:text-[#1DE9B6] transition-colors">{slot.time}</div>
-                    <div className="flex-1">
-                        {slot.status === 'busy' ? (
-                            <div className="flex items-center gap-6">
-                                <div className="w-14 h-14 rounded-2xl bg-[#1DE9B6] text-[#050807] flex items-center justify-center font-black text-xs shadow-[0_10px_20px_rgba(29,233,182,0.2)]">{slot.patient.charAt(0)}</div>
-                                <div>
-                                    <h5 className="text-lg font-black text-white tracking-tight leading-none mb-2">{slot.patient}</h5>
-                                    <p className="text-[10px] uppercase font-black text-[#1DE9B6] tracking-[0.2em]">{slot.service} ACTIVE</p>
-                                </div>
-                            </div>
-                        ) : (
-                            <p className={`text-sm font-black uppercase tracking-widest ${slot.status === 'break' ? 'text-[#6F7674] italic' : 'text-[#D4AF37]'}`}>{slot.patient === 'Available' ? 'Ready for Deployment' : slot.patient}</p>
-                        )}
+            {/* Timeline Dashboard */}
+            <div className="bg-white/[0.03] backdrop-blur-3xl rounded-[48px] p-10 border border-white/5 shadow-2xl relative overflow-hidden">
+                <div className="flex items-center justify-between mb-12 relative z-10">
+                    <div>
+                        <h3 className="text-3xl font-display font-black text-white tracking-tighter">Clinical Timeline</h3>
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#6F7674] mt-2">Managing Protocol for {new Date().toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })}</p>
                     </div>
-                    {slot.status === 'free' && (
-                        <button className="px-8 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-[#050807] transition-all duration-500 shadow-lg">Assign Lead</button>
-                    )}
+                    <div className="flex gap-3 bg-white/5 p-2 rounded-2xl border border-white/5">
+                        <div className="flex items-center gap-2 px-4 py-2">
+                           <div className="w-2 h-2 rounded-full bg-[#1DE9B6]" />
+                           <span className="text-[9px] font-black text-[#6F7674] uppercase tracking-widest">{todayBookings.length} APPOINTMENTS</span>
+                        </div>
+                    </div>
                 </div>
-            ))}
-        </div>
-    </motion.div>
-);
+
+                <div className="space-y-4 relative z-10">
+                    {timeline.map((slot, i) => (
+                        <div key={i} className={`flex items-center gap-10 p-8 rounded-[32px] border transition-all duration-500 group/slot ${slot.status === 'busy' ? 'bg-white/[0.05] border-white/10 shadow-xl' : slot.status === 'break' ? 'bg-black/20 border-transparent opacity-40' : 'bg-white/[0.02] border-dashed border-white/10 hover:border-[#1DE9B6]/40'}`}>
+                            <div className="w-24 text-xs font-black text-[#6F7674] uppercase tracking-widest group-hover/slot:text-[#1DE9B6] transition-colors">{slot.time}</div>
+                            <div className="flex-1">
+                                {slot.status === 'busy' ? (
+                                    <div className="flex items-center gap-6">
+                                        <div className="w-14 h-14 rounded-2xl bg-[#1DE9B6] text-[#050807] flex items-center justify-center font-black text-xs shadow-[0_10px_20px_rgba(29,233,182,0.2)]">{slot.appointment.name.charAt(0)}</div>
+                                        <div>
+                                            <h5 className="text-lg font-black text-white tracking-tight leading-none mb-2">{slot.appointment.name}</h5>
+                                            <p className="text-[10px] uppercase font-black text-[#1DE9B6] tracking-[0.2em]">{slot.appointment.service} · {slot.appointment.type === 'Home' ? 'RESIDENTIAL' : 'CLINICAL'}</p>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <p className={`text-sm font-black uppercase tracking-widest ${slot.status === 'break' ? 'text-[#6F7674] italic' : 'text-[#D4AF37]'}`}>{slot.status === 'break' ? 'Operational Pause' : 'Ready for Deployment'}</p>
+                                )}
+                            </div>
+                            {slot.status === 'free' && (
+                                <button className="px-8 py-3 rounded-xl bg-white/5 border border-white/10 text-white text-[10px] font-black uppercase tracking-[0.2em] hover:bg-white hover:text-[#050807] transition-all duration-500 shadow-lg">Assign Lead</button>
+                            )}
+                            {slot.status === 'busy' && (
+                                <span className={`px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-widest border border-[#1DE9B6]/20 text-[#1DE9B6] opacity-0 group-hover/slot:opacity-100 transition-opacity`}>Active Session</span>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </motion.div>
+    );
+};
 
 const Messages = () => (
     <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white/[0.03] backdrop-blur-3xl rounded-[48px] border border-white/5 shadow-2xl flex h-[750px] overflow-hidden">
@@ -544,7 +589,7 @@ export default function AdminDashboard() {
                         </div>
                     </motion.div>
                 )}
-                {activeTab === 'Schedule' && <Schedule key="schedule" />}
+                {activeTab === 'Schedule' && <Schedule bookings={bookings} key="schedule" />}
                 {activeTab === 'Messages' && <Messages key="messages" />}
             </AnimatePresence>
         </div>
