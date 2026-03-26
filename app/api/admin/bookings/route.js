@@ -88,30 +88,3 @@ export async function DELETE(req) {
     return NextResponse.json({ success: false, message: 'Internal server error' }, { status: 500 });
   }
 }
-
-// Manual Lead Creation
-export async function POST(req) {
-  try {
-    const user = verifyAuth(req);
-    if (!user) return NextResponse.json({ success: false, message: 'Unauthorized access' }, { status: 401 });
-
-    await dbConnect();
-    const body = await req.json();
-    const { name, phone, service, date, time, type } = body;
-
-    const appointment = await Appointment.create({
-      name,
-      phone,
-      service,
-      date,
-      time,
-      type: type || 'Clinic',
-      status: 'Pending'
-    });
-
-    return NextResponse.json({ success: true, data: appointment });
-  } catch (error) {
-    console.error('Admin API POST Error:', error);
-    return NextResponse.json({ success: false, message: 'Internal server error' }, { status: 500 });
-  }
-}
