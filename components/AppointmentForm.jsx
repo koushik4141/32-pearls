@@ -26,7 +26,8 @@ export default function AppointmentForm() {
     service: '',
     date: '',
     time: '',
-    type: 'Clinic'
+    type: 'Clinic',
+    location: null
   });
 
   const [status, setStatus] = useState('idle'); // idle, loading, success
@@ -39,6 +40,32 @@ export default function AppointmentForm() {
     if (ref.current) obs.observe(ref.current);
     return () => obs.disconnect();
   }, []);
+
+  const requestLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setFormData(prev => ({
+            ...prev,
+            location: {
+              lat: pos.coords.latitude,
+              lng: pos.coords.longitude
+            }
+          }));
+        },
+        (err) => {
+          console.warn("Location access denied or unavailable:", err.message);
+        }
+      );
+    }
+  };
+
+  const handleTypeChange = (newType) => {
+    setFormData(prev => ({ ...prev, type: newType }));
+    if (newType === 'Home') {
+      requestLocation();
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -205,13 +232,18 @@ export default function AppointmentForm() {
                             <button
                                 key={t}
                                 type="button"
-                                onClick={() => setFormData({ ...formData, type: t })}
+                                onClick={() => handleTypeChange(t)}
                                 className={`flex-1 py-4 px-6 rounded-[18px] text-[9px] font-black uppercase tracking-[0.3em] transition-all duration-500 ${formData.type === t ? 'bg-white shadow-[0_10px_20px_rgba(255,255,255,0.05)] text-[#050807]' : 'text-[#6F7674] hover:text-white'}`}
                             >
                                 {t === 'Clinic' ? 'Clinic Sanctuary' : 'Private Home Care'}
                             </button>
                         ))}
                     </div>
+                    {formData.type === 'Home' && formData.location && (
+                      <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-[8px] font-black uppercase tracking-widest text-[#1DE9B6] pl-2 flex items-center gap-2">
+                        <MapPin size={10} /> Precision Coordinates Locked
+                      </motion.div>
+                    )}
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
                       <div className="group">

@@ -8,7 +8,7 @@ export async function POST(req) {
     const body = await req.json();
     
     // Validate inputs
-    const { name, phone, service, date, time, type } = body;
+    const { name, phone, service, date, time, type, location } = body;
     
     if (!name || !phone || !service || !date || !time) {
       return NextResponse.json({ success: false, message: 'Missing required fields' }, { status: 400 });
@@ -21,7 +21,8 @@ export async function POST(req) {
       date,
       time,
       type: type || 'Clinic',
-      status: 'Pending'
+      status: 'Pending',
+      location: location || null
     });
 
     return NextResponse.json({ 

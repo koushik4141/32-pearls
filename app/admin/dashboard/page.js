@@ -511,8 +511,16 @@ export default function AdminDashboard() {
                                             <td className="px-12 py-8">
                                                 <div className="flex flex-col gap-2">
                                                     <span className="text-sm font-black text-white uppercase tracking-tight">{b.service}</span>
-                                                    <span className={`text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full w-fit ${b.type === 'Home' ? 'bg-[#1DE9B6]/10 text-[#1DE9B6]' : 'bg-[#D4AF37]/10 text-[#D4AF37]'}`}>
-                                                        {b.type === 'Home' ? 'RESIDENTIAL UNIT' : 'CLINICAL FACILITY'}
+                                                    <span className={`text-[9px] font-black uppercase tracking-[0.2em] px-3 py-1 rounded-full w-fit flex items-center gap-2 ${b.type === 'Home' ? 'bg-[#1DE9B6]/10 text-[#1DE9B6]' : 'bg-[#D4AF37]/10 text-[#D4AF37]'}`}>
+                                                        {b.type === 'Home' ? (
+                                                            <>
+                                                              <MapPin size={10} />
+                                                              RESIDENTIAL UNIT
+                                                              {b.location?.lat && (
+                                                                <a href={`https://www.google.com/maps?q=${b.location.lat},${b.location.lng}`} target="_blank" className="ml-2 underline hover:text-white transition-colors">VIEW PATH</a>
+                                                              )}
+                                                            </>
+                                                        ) : 'CLINICAL FACILITY'}
                                                     </span>
                                                 </div>
                                             </td>

@@ -33,6 +33,11 @@ const AppointmentSchema = new mongoose.Schema({
     enum: ['Pending', 'Contacted', 'Completed', 'Trash'],
     default: 'Pending',
   },
+  location: {
+    lat: Number,
+    lng: Number,
+    address: String,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
