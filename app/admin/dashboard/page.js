@@ -9,6 +9,7 @@ import {
   TrendingUp, Activity, Bell, UserPlus, FileText, Send, 
   Check, MoreHorizontal, Smile, MapPin
 } from 'lucide-react';
+import Image from 'next/image';
 
 // --- MOCK DATA ---
 const mockPatients = [
