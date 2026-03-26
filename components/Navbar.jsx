@@ -62,6 +62,15 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="/admin/login"
+                className={`px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 flex items-center gap-2 ${
+                  scrolled ? 'text-[#D4AF37] hover:text-[#1DE9B6]' : 'text-[#D4AF37]/80 hover:text-white hover:bg-white/5'
+                }`}
+              >
+                <ShieldCheck size={12} />
+                Admin
+              </a>
             </nav>
 
             {/* Desktop CTA */}
@@ -119,6 +128,14 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              <a
+                href="/admin/login"
+                onClick={() => setMenuOpen(false)}
+                className="px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-[#D4AF37] flex items-center gap-3 hover:bg-white/5 transition-all"
+              >
+                <ShieldCheck size={16} />
+                Admin Portal
+              </a>
               <div className="mt-8 pt-8 border-t border-white/5 flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
                   <a href="tel:+918296552516" className="flex items-center justify-center gap-3 bg-white/5 py-5 rounded-[24px] text-[10px] font-black uppercase tracking-widest text-white">
