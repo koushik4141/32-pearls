@@ -1,7 +1,12 @@
 'use client';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
+import HomeServiceBox from '@/components/HomeServiceBox';
 import Services from '@/components/Services';
+import WhyChooseUs from '@/components/WhyChooseUs';
+import SmileTransformations from '@/components/SmileTransformations';
+import VideoReviews from '@/components/VideoReviews';
+import InternationalTrust from '@/components/InternationalTrust';
 import Doctors from '@/components/Doctors';
 import Testimonials from '@/components/Testimonials';
 import Location from '@/components/Location';
@@ -12,18 +17,42 @@ import LeadPopup from '@/components/LeadPopup';
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#050807]">
+    <main className="min-h-screen bg-white">
       <Navbar />
       <Hero />
-      <div className="relative z-10 w-full">
+      <HomeServiceBox />
+      
+      <div id="services">
         <Services />
       </div>
-      <Doctors />
-      <Testimonials />
-      <Location />
+      
+      <div id="why-us">
+        <WhyChooseUs />
+      </div>
+      
+      <div id="transformations">
+        <SmileTransformations />
+      </div>
+      
+      <VideoReviews />
+      <InternationalTrust />
+      
+      <div id="doctors">
+        <Doctors />
+      </div>
+      
+      <div id="testimonials">
+        <Testimonials />
+      </div>
+      
+      <div id="location">
+        <Location />
+      </div>
+      
       <div id="appointment">
         <AppointmentForm />
       </div>
+      
       <Footer />
       <FloatingActions />
       <LeadPopup />
