@@ -51,6 +51,7 @@ export default function Location() {
             animate={active ? { opacity: 1, scale: 1 } : {}}
             transition={{ delay: 0.2, duration: 1 }}
             className="rounded-[48px] overflow-hidden border border-white/10 shadow-[0_40px_100px_rgba(0,0,0,0.5)] relative group"
+          >
             {/* Glossy Overlay */}
             <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 to-transparent pointer-events-none z-10" />
             
