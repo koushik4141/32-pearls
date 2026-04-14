@@ -41,7 +41,7 @@ const serviceData = [
     title: 'Dental Crown',
     desc: 'Durable and aesthetic restorations to strengthen teeth. Our crowns are custom-crafted to match your tooth color and provide maximum durability.',
     icon: <ShieldCheck size={22} className="text-[#513c2c]" />,
-    image: '/logo.png', // Placeholder
+    image: '/crown.jpg', 
     price: 'Starting ₹ 8,500',
     benefits: ['Metal-Free Options', 'Perfect Fit', 'Full Protection']
   },
@@ -49,7 +49,7 @@ const serviceData = [
     title: 'Dental Bridges',
     desc: 'Fill gaps between teeth with fixed prosthetic solutions. Bridges help maintain facial structure and prevent other teeth from shifting.',
     icon: <Layers size={22} className="text-[#513c2c]" />,
-    image: '/logo.png',
+    image: '/bridges.jpg',
     price: 'Starting ₹ 15,000',
     benefits: ['Restores Function', 'Aesthetic Natural Look', 'Permanent Fix']
   },
@@ -57,7 +57,7 @@ const serviceData = [
     title: 'Dentures',
     desc: 'Custom-fit, comfortable prosthetic solutions for complete smile restoration. We offer both partial and full dentures tailored to your lifestyle.',
     icon: <Activity size={22} className="text-[#513c2c]" />,
-    image: '/logo.png',
+    image: '/dentures.jpg',
     price: 'Starting ₹ 25,000',
     benefits: ['Custom Comfort', 'Enhanced Chewing', 'Full Rehabilitation']
   },
@@ -73,7 +73,7 @@ const serviceData = [
     title: 'Implants',
     desc: 'Permanent and natural-looking tooth replacements using world-class titanium technology. The gold standard in tooth replacement.',
     icon: <Zap size={22} className="text-[#513c2c]" />,
-    image: '/implants.png',
+    image: '/dental_implants.jpg',
     price: 'Starting ₹ 33,500',
     benefits: ['Permanent Solution', 'Bone Preservation', 'Looks & Feels Natural']
   },
@@ -81,7 +81,7 @@ const serviceData = [
     title: 'Aligners & Braces',
     desc: 'Straighten your teeth with modern orthodontic solutions. From traditional braces to invisible aligners, we have the right fit for you.',
     icon: <Smile size={22} className="text-[#513c2c]" />,
-    image: '/aligners.png',
+    image: '/braces_aligners.jpg',
     price: 'Starting ₹ 45,000',
     benefits: ['Invisible Options', 'Expert Orthodontists', 'Lifelong Results']
   },
