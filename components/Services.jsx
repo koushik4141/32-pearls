@@ -33,7 +33,7 @@ const serviceData = [
     title: 'Dental Fillings',
     desc: 'High-quality, tooth-colored composite fillings to restore and protect damaged teeth. We use bio-compatible materials that blend seamlessly with your natural enamel.',
     icon: <CheckCircle2 size={22} className="text-[#513c2c]" />,
-    image: '/hero-woman.png', // Generic placeholder for now
+    image: '/fillings.png',
     price: 'Starting ₹ 1,500',
     benefits: ['Natural Look', 'Durable Material', 'Bio-compatible']
   },
