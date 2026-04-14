@@ -30,7 +30,7 @@ export default function Footer() {
               <img 
                 src="/logo-dark.png" 
                 alt="32 Pearls Dental Clinic" 
-                className="h-16 w-auto object-contain"
+                className="h-20 w-auto object-contain"
               />
             </div>
             <p className="text-gray-400 text-base leading-relaxed mb-8">

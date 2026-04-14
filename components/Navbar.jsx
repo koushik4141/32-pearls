@@ -39,7 +39,7 @@ export default function Navbar() {
               <img 
                 src="/logo.png" 
                 alt="32 Pearls Dental Clinic" 
-                className="h-10 sm:h-12 w-auto object-contain transition-all duration-500 group-hover:scale-105"
+                className="h-16 sm:h-20 lg:h-24 w-auto object-contain transition-all duration-500 group-hover:scale-105"
               />
             </a>
 
@@ -49,14 +49,14 @@ export default function Navbar() {
                 <a
                   key={link.href}
                   href={link.href}
-                  className="px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-text-dark hover:text-accent transition-all duration-300"
+                  className="px-5 py-2 rounded-full text-xs font-black uppercase tracking-wider text-text-dark hover:text-accent transition-all duration-300"
                 >
                   {link.label}
                 </a>
               ))}
               <a
                 href="/admin/login"
-                className="px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest text-text-muted hover:text-accent flex items-center gap-2 transition-all duration-300"
+                className="px-5 py-2 rounded-full text-xs font-black uppercase tracking-wider text-text-muted hover:text-accent flex items-center gap-2 transition-all duration-300"
               >
                 <ShieldCheck size={12} />
                 Admin
@@ -67,14 +67,14 @@ export default function Navbar() {
             <div className="hidden lg:flex items-center gap-8">
               <a
                 href="tel:+918296552516"
-                className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-text-dark hover:text-accent transition-colors"
+                className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-text-dark hover:text-accent transition-colors"
               >
                 <Phone size={14} className="text-accent" />
                 <span>+91 82965 52516</span>
               </a>
               <a
                 href="#appointment"
-                className="bg-accent text-text-dark text-[10px] font-black uppercase tracking-widest px-8 py-3.5 rounded-full hover:scale-105 active:scale-95 transition-all shadow-gold border border-accent/20"
+                className="bg-accent text-text-dark text-xs font-black uppercase tracking-wider px-8 py-4 rounded-full hover:scale-105 active:scale-95 transition-all shadow-gold border border-accent/20"
               >
                 Book Appointment
               </a>
@@ -106,7 +106,7 @@ export default function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="px-6 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] text-text-muted hover:text-accent hover:bg-secondary transition-all"
+                  className="px-6 py-4 rounded-2xl text-xs font-black uppercase tracking-[0.2em] text-text-muted hover:text-accent hover:bg-secondary transition-all"
                 >
                   {link.label}
                 </a>
