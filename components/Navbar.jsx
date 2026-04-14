@@ -35,18 +35,12 @@ export default function Navbar() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center shadow-gold">
-                <span className="text-text-dark font-black text-lg">32</span>
-              </div>
-              <div>
-                <div className="font-display font-black text-xl text-text-dark leading-tight tracking-tight">
-                  32 Pearls
-                </div>
-                <div className="text-[9px] font-black uppercase tracking-[0.3em] text-accent">
-                  Dental Clinic
-                </div>
-              </div>
+            <a href="#" className="flex items-center group">
+              <img 
+                src="/logo.png" 
+                alt="32 Pearls Dental Clinic" 
+                className="h-10 sm:h-12 w-auto object-contain transition-all duration-500 group-hover:scale-105"
+              />
             </a>
 
             {/* Desktop Nav */}

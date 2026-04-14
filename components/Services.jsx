@@ -1,145 +1,189 @@
 'use client';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  Sparkles, 
-  ShieldCheck, 
+  ChevronDown, 
+  ChevronUp, 
+  Stethoscope, 
   Activity, 
-  Trash2, 
-  Smile, 
-  Layers, 
   Scissors, 
-  Search,
-  CheckCircle2,
-  Syringe
+  Smile, 
+  ShieldCheck, 
+  Layers, 
+  Syringe, 
+  Baby, 
+  Dna, 
+  Siren, 
+  Moon, 
+  Zap,
+  CheckCircle2
 } from 'lucide-react';
 
-const services = [
+const serviceData = [
   {
-    icon: <Syringe className="text-accent" />,
     title: 'Root Canal Treatment',
-    desc: 'Advanced endodontic care to save your natural teeth with painless, precise protocols.'
+    desc: 'Advanced endodontic care to save your natural teeth with painless, precise protocols. Our experts use the latest technology to ensure comfort and long-lasting results.',
+    icon: <Syringe size={24} className="text-[#333]" />
   },
   {
-    icon: <Layers className="text-accent" />,
-    title: 'Dental Implants',
-    desc: 'Permanent and natural-looking tooth replacements using world-class titanium technology.'
-  },
-  {
-    icon: <Sparkles className="text-accent" />,
-    title: 'Teeth Whitening',
-    desc: 'Professional brightening treatments to remove stains and give you a dazzling smile.'
-  },
-  {
-    icon: <CheckCircle2 className="text-accent" />,
     title: 'Dental Fillings',
-    desc: 'High-quality, tooth-colored composite fillings to restore and protect damaged teeth.'
+    desc: 'High-quality, tooth-colored composite fillings to restore and protect damaged teeth. We use bio-compatible materials that blend seamlessly with your natural enamel.',
+    icon: <CheckCircle2 size={24} className="text-[#333]" />
   },
   {
-    icon: <Trash2 className="text-accent" />,
-    title: 'Tooth Extraction',
-    desc: 'Safe and gentle removal of damaged or problematic teeth with minimal discomfort.'
+    title: 'Dental Crown',
+    desc: 'Durable and aesthetic restorations to strengthen teeth. Our crowns are custom-crafted to match your tooth color and provide maximum durability.',
+    icon: <ShieldCheck size={24} className="text-[#333]" />
   },
   {
-    icon: <Smile className="text-accent" />,
-    title: 'Braces & Aligners',
-    desc: 'Straighten your teeth with modern orthodontic solutions including invisible aligners.'
+    title: 'Dental Bridges',
+    desc: 'Fill gaps between teeth with fixed prosthetic solutions. Bridges help maintain facial structure and prevent other teeth from shifting.',
+    icon: <Layers size={24} className="text-[#333]" />
   },
   {
-    icon: <ShieldCheck className="text-accent" />,
-    title: 'Crowns & Bridges',
-    desc: 'Durable and aesthetic restorations to strengthen teeth and fill gaps beautifully.'
-  },
-  {
-    icon: <Activity className="text-accent" />,
     title: 'Dentures',
-    desc: 'Custom-fit, comfortable prosthetic solutions for complete smile restoration.'
+    desc: 'Custom-fit, comfortable prosthetic solutions for complete smile restoration. We offer both partial and full dentures tailored to your lifestyle.',
+    icon: <Activity size={24} className="text-[#333]" />
   },
   {
-    icon: <Scissors className="text-accent" />,
-    title: 'Oral Surgery',
-    desc: 'Expert surgical procedures for complex dental issues, handled with extreme care.'
+    title: 'Wisdom Tooth Removal',
+    desc: 'Safe and gentle removal of problematic wisdom teeth. Our surgical techniques minimize swelling and promote faster recovery.',
+    icon: <Scissors size={24} className="text-[#333]" />
   },
   {
-    icon: <Search className="text-accent" />,
-    title: 'X-Ray / Diagnostics',
-    desc: 'Detailed digital imaging and precise diagnosis for effective treatment planning.'
+    title: 'Implants',
+    desc: 'Permanent and natural-looking tooth replacements using world-class titanium technology. The gold standard in tooth replacement.',
+    icon: <Zap size={24} className="text-[#333]" />
+  },
+  {
+    title: 'Aligners & Braces',
+    desc: 'Straighten your teeth with modern orthodontic solutions. From traditional braces to invisible aligners, we have the right fit for you.',
+    icon: <Smile size={24} className="text-[#333]" />
+  },
+  {
+    title: 'Orthognathic Treatment',
+    desc: 'Corrective jaw surgery to improve facial aesthetics and functional bite. We work with specialized surgeons for life-changing results.',
+    icon: <Stethoscope size={24} className="text-[#333]" />
+  },
+  {
+    title: 'TMJ Maxillofacial / Sport Injuries',
+    desc: 'Specialized care for jaw joint disorders (TMJ) and facial trauma resulting from sports or accidents.',
+    icon: <Activity size={24} className="text-[#333]" />
+  },
+  {
+    title: 'Corrective Jaw Surgeries',
+    desc: 'Advanced procedures to align jaw structure, improving breathing, speech, and overall facial harmony.',
+    icon: <Scissors size={24} className="text-[#333]" />
+  },
+  {
+    title: 'Sleep Apnea',
+    desc: 'Custom dental appliances to help keep airway passages open during sleep, significantly reducing snoring and apnea episodes.',
+    icon: <Moon size={24} className="text-[#333]" />
+  },
+  {
+    title: 'Pediatric Dentistry',
+    desc: 'Dedicated dental care for children in a friendly environment. We focus on preventive care and building positive dental habits.',
+    icon: <Baby size={24} className="text-[#333]" />
+  },
+  {
+    title: 'Maxillofacial Trauma',
+    desc: 'Expert management of facial fractures and complex injuries. We provide rapid response and reconstructive expertise.',
+    icon: <Siren size={24} className="text-[#333]" />
+  },
+  {
+    title: 'Cleft Lip and Cleft Palate',
+    desc: 'Comprehensive surgical and dental management of cleft conditions, restoring function and appearance with compassion.',
+    icon: <Dna size={24} className="text-[#333]" />
+  },
+  {
+    title: 'Cyst and Tumors',
+    desc: 'Precision diagnosis and surgical removal of oral growths. We use advanced pathology and surgical techniques for patient safety.',
+    icon: <Activity size={24} className="text-[#333]" />
   }
 ];
 
 export default function Services() {
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const toggle = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+
   return (
-    <section id="services" className="py-24 bg-secondary/30 relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
+    <section id="services" className="py-24 bg-[#f9f9f9]">
+      <div className="max-w-4xl mx-auto px-6">
+        {/* Clove-style Heading */}
         <div className="text-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-2 bg-white rounded-full border border-accent/20 mb-4"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest text-text-dark">Our Expertise</span>
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-4xl lg:text-6xl font-display font-black text-text-dark mb-6"
-          >
-            Comprehensive <span className="text-accent">Dental Services</span>
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-            className="text-text-muted text-lg max-w-2xl mx-auto"
-          >
-            We offer a wide range of specialized dental treatments designed to give you the perfect smile you deserve.
-          </motion.p>
+          <h2 className="text-[28px] md:text-[36px] font-black text-[#ef8139] uppercase tracking-tight">
+            Our Treatment, Products and Procedures
+          </h2>
+          <div className="w-20 h-1.5 bg-[#ef8139] mx-auto mt-4 rounded-full"></div>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((svc, i) => (
-            <motion.div
-              key={svc.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white p-10 rounded-[40px] shadow-soft hover:shadow-premium transition-all duration-500 group border border-gray-50 hover:-translate-y-2"
+        {/* Action List Section */}
+        <div className="space-y-4">
+          {serviceData.map((svc, i) => (
+            <div 
+              key={i} 
+              className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow transition-all overflow-hidden"
             >
-              <div className="w-16 h-16 rounded-[24px] bg-secondary flex items-center justify-center mb-8 group-hover:bg-accent transition-colors duration-500">
-                <div className="transform group-hover:scale-110 transition-transform duration-500">
-                  {svc.icon}
+              <button
+                onClick={() => toggle(i)}
+                className="w-full h-full flex items-center justify-between p-5 md:p-6 text-left"
+              >
+                <div className="flex items-center gap-6">
+                  {/* Service Icon */}
+                  <div className="w-12 h-12 shrink-0 bg-gray-50 rounded-xl flex items-center justify-center">
+                    {svc.icon}
+                  </div>
+                  {/* Service Title */}
+                  <span className="text-xl font-bold text-[#333] tracking-tight">
+                    {svc.title}
+                  </span>
                 </div>
-              </div>
-              <h3 className="text-2xl font-display font-black text-text-dark mb-4 group-hover:text-accent transition-colors">
-                {svc.title}
-              </h3>
-              <p className="text-text-muted leading-relaxed font-medium">
-                {svc.desc}
-              </p>
-            </motion.div>
+                {/* Toggle Icon */}
+                <div className={`text-[#ef8139] transition-transform duration-300 ${openIndex === i ? 'rotate-180' : ''}`}>
+                  <ChevronDown size={28} />
+                </div>
+              </button>
+
+              {/* Accordion Content */}
+              <AnimatePresence>
+                {openIndex === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  >
+                    <div className="px-5 pb-6 md:px-24 md:pb-8 pt-0 border-t border-gray-50 translate-y-[-1px]">
+                      <p className="text-[#666] leading-relaxed mb-6 font-medium">
+                        {svc.desc}
+                      </p>
+                      <a 
+                        href="#appointment" 
+                        className="inline-flex items-center gap-2 text-[#ef8139] font-black uppercase text-sm tracking-wider hover:gap-3 transition-all"
+                      >
+                        Learn More & Book Consultation <span>→</span>
+                      </a>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           ))}
         </div>
 
-        {/* CTA below services */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
-          className="mt-20 bg-accent p-12 rounded-[50px] shadow-gold flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
-        >
-          <div className="space-y-2">
-            <h4 className="text-3xl font-display font-black text-text-dark">Ready for your transformation?</h4>
-            <p className="text-text-dark/80 font-bold text-lg">Book your consultation today and take the first step towards a better smile.</p>
-          </div>
-          <a href="#appointment" className="bg-white text-text-dark font-black px-10 py-5 rounded-full hover:scale-105 active:scale-95 transition-all shadow-lg whitespace-nowrap">
-            Book Appointment Now
+        {/* Final CTA consistent with the project's aesthetics but linked to this section */}
+        <div className="mt-20 text-center">
+          <p className="text-gray-400 font-bold uppercase tracking-widest text-sm mb-6">Experience World-Class Dental Care</p>
+          <a 
+            href="#appointment" 
+            className="inline-block bg-[#ef8139] text-white font-black px-12 py-5 rounded-full shadow-xl hover:scale-105 active:scale-95 transition-all text-lg"
+          >
+            Start Your Treatment Today
           </a>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -27,13 +27,11 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-4 mb-8">
-              <div className="w-12 h-12 rounded-2xl bg-accent flex items-center justify-center shadow-gold">
-                <span className="text-text-dark font-black text-xl">32</span>
-              </div>
-              <div>
-                <div className="font-display font-black text-2xl leading-tight text-white tracking-tight">32 Pearls</div>
-                <div className="text-[10px] text-accent font-black uppercase tracking-[0.3em]">Dental Clinic</div>
-              </div>
+              <img 
+                src="/logo-dark.png" 
+                alt="32 Pearls Dental Clinic" 
+                className="h-16 w-auto object-contain"
+              />
             </div>
             <p className="text-gray-400 text-base leading-relaxed mb-8">
               Providing premium, modern dental care with a focus on comfort and high-quality results. Your perfect smile starts here.
