@@ -5,6 +5,7 @@ import HomeServiceBox from '@/components/HomeServiceBox';
 import Services from '@/components/Services';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import SmileTransformations from '@/components/SmileTransformations';
+import Gallery from '@/components/Gallery';
 import VideoReviews from '@/components/VideoReviews';
 import InternationalTrust from '@/components/InternationalTrust';
 import Doctors from '@/components/Doctors';
@@ -32,6 +33,10 @@ export default function Home() {
       
       <div id="transformations">
         <SmileTransformations />
+      </div>
+
+      <div id="gallery">
+        <Gallery />
       </div>
       
       <VideoReviews />
