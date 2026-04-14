@@ -159,6 +159,9 @@ export default function Gallery() {
     { label: 'Orthodontic Result', detail: 'Clear Aligner Treatment' },
   ];
 
+  // Array of 20 images copied from the 'p gallery'
+  const galleryImages = Array.from({ length: 20 }, (_, i) => `/gallery/img${i + 1}.jpeg`);
+
   return (
     <section id="gallery" ref={ref} className="py-24 bg-cloud-gray">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -275,6 +278,39 @@ export default function Gallery() {
             </div>
           </motion.div>
         </div>
+
+        {/* Real Clinic Photos Grid */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={active ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="mt-32"
+        >
+          <div className="text-center mb-12">
+            <h3 className="text-3xl font-black text-text-dark uppercase tracking-tight">Our Clinic & Cases</h3>
+            <p className="text-text-muted mt-2 font-medium">A glimpse into our daily work and happy patients</p>
+          </div>
+          
+          <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+            {galleryImages.map((src, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={active ? { opacity: 1, scale: 1 } : {}}
+                transition={{ duration: 0.5, delay: 0.2 + (idx * 0.05) }}
+                className="break-inside-avoid relative rounded-2xl overflow-hidden group shadow-soft hover:shadow-premium transition-all duration-300"
+              >
+                <div className="absolute inset-0 bg-accent/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 mix-blend-overlay"></div>
+                <img 
+                  src={src} 
+                  alt={`Gallery Image ${idx + 1}`} 
+                  loading="lazy"
+                  className="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
+                />
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </section>
   );
