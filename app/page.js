@@ -4,12 +4,11 @@ import Hero from '@/components/Hero';
 import HomeServiceBox from '@/components/HomeServiceBox';
 import Services from '@/components/Services';
 import WhyChooseUs from '@/components/WhyChooseUs';
-import SmileTransformations from '@/components/SmileTransformations';
-import Gallery from '@/components/Gallery';
 import VideoReviews from '@/components/VideoReviews';
 import InternationalTrust from '@/components/InternationalTrust';
 import Doctors from '@/components/Doctors';
 import Testimonials from '@/components/Testimonials';
+import ScrollGallery from '@/components/ScrollGallery';
 import Location from '@/components/Location';
 import AppointmentForm from '@/components/AppointmentForm';
 import Footer from '@/components/Footer';
@@ -31,13 +30,7 @@ export default function Home() {
         <WhyChooseUs />
       </div>
       
-      <div id="transformations">
-        <SmileTransformations />
-      </div>
-
-      <div id="gallery">
-        <Gallery />
-      </div>
+      <ScrollGallery />
       
       <VideoReviews />
       <InternationalTrust />
