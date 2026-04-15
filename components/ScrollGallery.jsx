@@ -161,22 +161,25 @@ export default function ScrollGallery() {
                 viewport={{ once: true }}
                 transition={{ delay: (i % 5) * 0.05, duration: 0.5 }}
                 className="shrink-0 group/card relative"
-                onClick={() => i === 0 || setSelectedImage(img)}
+                onClick={() => setSelectedImage(img)}
               >
-                <div className="relative w-[280px] md:w-[380px] aspect-[4/5] rounded-[32px] overflow-hidden bg-gray-100 border border-blue-50 shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2 group-hover/card:border-blue-100">
+                <div className="relative w-[300px] md:w-[450px] aspect-[16/10] rounded-[24px] overflow-hidden bg-[#f1f5f9] border border-blue-50/50 shadow-sm transition-all duration-500 group-hover/card:shadow-xl group-hover/card:-translate-y-2 group-hover/card:border-blue-100">
                   <Image 
                     src={img.src} 
                     alt={img.title}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover/card:scale-110"
+                    className="object-contain p-2 transition-transform duration-700 group-hover/card:scale-[1.02]"
                   />
                   
                   {/* Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent opacity-0 group-hover/card:opacity-100 transition-opacity duration-300 flex items-end p-6">
                     <div className="flex items-center justify-between w-full">
-                      <span className="text-white font-bold text-lg">{img.title}</span>
-                      <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
-                        <Maximize2 size={18} />
+                      <div className="flex flex-col">
+                        <span className="text-white font-bold text-sm uppercase tracking-widest">{img.title}</span>
+                        <span className="text-white/60 text-[10px] uppercase tracking-tighter">Click to Enlarge</span>
+                      </div>
+                      <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center text-white border border-white/30">
+                        <Maximize2 size={14} />
                       </div>
                     </div>
                   </div>
