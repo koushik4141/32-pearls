@@ -69,6 +69,19 @@ const doctors = [
     fees: '500',
     timing: 'Mon-Sun (1 PM - 3 PM)',
     contact: 'Ext. 469'
+  },
+  {
+    id: 6,
+    name: 'Dr. Abiraj G.',
+    degree: 'Master of Dental Surgery (MDS)',
+    role: 'Dental Surgeon',
+    specialty: 'Surgeon',
+    experience: '1.5 Years Experience',
+    rating: '5.0',
+    image: '/doctors/abiraj.jpg',
+    fees: '500',
+    timing: 'Mon-Sat (10 AM - 7 PM)',
+    contact: 'Ext. 470'
   }
 ];
 
