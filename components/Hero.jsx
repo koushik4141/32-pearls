@@ -82,7 +82,7 @@ export default function Hero() {
           >
             <div className="relative z-10 rounded-[60px] overflow-hidden shadow-premium">
               <img 
-                src="/hero-main.jpg" 
+                src="/hero-woman.png" 
                 alt="32 Pearls Dental Clinic - Premier Dental Care"
                 className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
               />
