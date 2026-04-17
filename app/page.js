@@ -5,7 +5,6 @@ import HomeServiceBox from '@/components/HomeServiceBox';
 import Services from '@/components/Services';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import VideoReviews from '@/components/VideoReviews';
-import InternationalTrust from '@/components/InternationalTrust';
 import Doctors from '@/components/Doctors';
 import Testimonials from '@/components/Testimonials';
 import ScrollGallery from '@/components/ScrollGallery';
@@ -33,7 +32,6 @@ export default function Home() {
       <ScrollGallery />
       
       <VideoReviews />
-      <InternationalTrust />
       
       <div id="doctors">
         <Doctors />
