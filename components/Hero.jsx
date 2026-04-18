@@ -80,11 +80,11 @@ export default function Hero() {
             transition={{ duration: 1 }}
             className="relative"
           >
-            <div className="relative z-10 rounded-[60px] overflow-hidden shadow-premium">
+            <div className="relative z-10 rounded-[60px] overflow-hidden shadow-premium bg-gray-50">
               <img 
-                src="/hero-woman.png" 
+                src="/hero-new.png" 
                 alt="32 Pearls Dental Clinic - Premier Dental Care"
-                className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
+                className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700 max-h-[600px]"
               />
             </div>
             
