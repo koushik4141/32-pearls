@@ -41,7 +41,6 @@ const Overview = ({ stats, bookings }) => (
   <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-12">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
       {[
-        { label: 'System Revenue', value: '₹0', icon: TrendingUp, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
         { label: 'Total Registry', value: stats.total, icon: Users, color: 'text-[#1DE9B6]', bg: 'bg-[#1DE9B6]/10' },
         { label: 'Active Deployments', value: stats.homeVisits, icon: MapPin, color: 'text-[#D4AF37]', bg: 'bg-[#D4AF37]/10' },
         { label: 'Patient Loyalty', value: '0%', icon: Smile, color: 'text-white', bg: 'bg-white/10' }

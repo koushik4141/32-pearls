@@ -14,7 +14,6 @@ const doctors = [
     experience: '19 Years Experience',
     rating: '5.0',
     image: '/doctors/reshma.jpg',
-    fees: '200',
     timing: 'Mon-Sun (8 AM - 10 PM)',
     contact: 'Ext. 553'
   },
@@ -27,7 +26,6 @@ const doctors = [
     experience: '6 Years Experience',
     rating: '5.0',
     image: '/doctors/suhail.png',
-    fees: '500',
     timing: 'Wed, Sat (10:30 AM - 1 PM)',
     contact: 'Ext. 469'
   },
@@ -40,7 +38,6 @@ const doctors = [
     experience: '9 Years Experience',
     rating: '5.0',
     image: '/doctors/akhil.jpg',
-    fees: '500',
     timing: 'Mon-Sun (8:30 PM - 10 PM)',
     contact: 'Ext. 469'
   },
@@ -53,7 +50,6 @@ const doctors = [
     experience: '13 Years Experience',
     rating: '5.0',
     image: '/doctors/vikas.jpg',
-    fees: '500',
     timing: 'Mon-Sun (8 AM - 10 PM)',
     contact: 'Ext. 469'
   },
@@ -66,7 +62,6 @@ const doctors = [
     experience: '18 Years Experience',
     rating: '5.0',
     image: '/doctors/shraddha.jpg',
-    fees: '500',
     timing: 'Mon-Sun (1 PM - 3 PM)',
     contact: 'Ext. 469'
   },
@@ -78,8 +73,7 @@ const doctors = [
     specialty: 'Surgeon',
     experience: '1.5 Years Experience',
     rating: '5.0',
-    image: '/doctors/abiraj.jpg',
-    fees: '500',
+    image: '/abiram.jpg',
     timing: 'Mon-Sat (10 AM - 7 PM)',
     contact: 'Ext. 470'
   }
@@ -228,13 +222,9 @@ export default function Doctors() {
                     <p className="text-[9px] font-medium text-text-muted uppercase tracking-[0.3em] mb-4">{doc.degree}</p>
                     
                     <div className="space-y-3">
-                        <div className="flex items-center gap-3 text-text-muted text-[10px] uppercase font-black tracking-widest bg-secondary/30 p-3 rounded-2xl border border-transparent">
+                        <div className="flex items-center gap-3 text-text-muted text-[10px] uppercase font-black tracking-widest bg-secondary/30 p-4 rounded-2xl border border-transparent">
                             <Clock size={12} className="text-accent" />
                             {doc.timing}
-                        </div>
-                        <div className="flex items-center gap-3 text-text-muted text-[10px] uppercase font-black tracking-widest bg-secondary/30 p-3 rounded-2xl border border-transparent">
-                            <IndianRupee size={12} className="text-accent" />
-                            Consultation: ₹{doc.fees}
                         </div>
                     </div>
                   </div>
